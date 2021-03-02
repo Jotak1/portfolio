@@ -2,7 +2,7 @@
 import './Presentacion.css';
 import { styled, makeStyles } from '@material-ui/core/styles';
 import React,{useState} from 'react';
-import { TypingStep } from "typing-effect-reactjs";
+import { Typing, TypingStep } from "typing-effect-reactjs";
 import { Button } from '@material-ui/core';
 
 const useStyles = makeStyles({
@@ -32,23 +32,19 @@ const useStyles = makeStyles({
         width: 200,
         textAlign: "center",
         transition: "background",
-        transitionDuration: 2      ,
-    
+        transitionDuration: 2,        
+    },
+    BotonHi: {
+      visibility: 'hidden',
     }
   });
 
 const sequence = [
     {
-      content: "Hola!\nsoy Juan Pablo,\n",
+      content: "Hola! soy Juan Pablo,\n",
       config: {
         styleClass: "typing",
       },
-    },
-    {
-        content: 500,
-        config: {
-            styleClass: "typing", // Custom Style class
-        },
     },
     {
         content: 400,
@@ -56,8 +52,41 @@ const sequence = [
             styleClass: "typing", // Custom Style class
         },
     },
+  
     {
-      content: "Desarrollador Front End",
+      content: "Desarrollador Front End\n",
+      config: {
+        styleClass: "typing",
+      },
+    },
+  ]
+  const sequence1 = [
+    {
+      content: "Contrata",
+      config: {
+        styleClass: "typing",
+      },
+    },
+    {
+      content: -4,
+      config: {
+        styleClass: "wrong",
+      },
+    },
+    {
+      content: 'actame',
+      config: {
+        styleClass: "typing",
+      },
+    },
+    {
+      content: -10,
+      config: {
+        styleClass: "wrong",
+      },
+    },
+    {
+      content: '<button className="sexyButton">\nContactame</button>',
       config: {
         styleClass: "typing",
       },
@@ -65,15 +94,43 @@ const sequence = [
   ];
 
   function MyButton(props) {
-    const { color, ...other } = props;
+    const { color, botonHide, ...other } = props;
     const classes = useStyles(props);
-    return <Button className={classes.Boton} {...other} />;
-  }
+    if(botonHide){
+      return <Button className={classes.BotonHi} {...other} />;
+    }
+    else {
+      return <Button className={classes.Boton} {...other} />;
+    }
+  };
 
+
+  
+  
  
 const Presentacion = () => {
+
+    
     const [color, setColor] = useState("blue");
+    const [botonHide, setBotonHide] = useState(true);
+    const [typing1, setTyping1] = useState(true)
+    const [style, setStyle] = useState([])
     const classes = useStyles();
+
+    
+ 
+    const buttonHide = () => {
+      setTimeout(() => {
+        setTyping1(false);
+        typingHid();
+      }, 5500);
+    };
+    const typingHid = () => {
+      setTimeout(() => {
+        setBotonHide(false);
+        setTyping1(true);
+      }, 6000);
+  };
     return ( 
         <div className={classes.Container}>
         <div className={classes.Titulo}>
@@ -82,9 +139,19 @@ const Presentacion = () => {
                 cursorColor={'#fff'}
                 typeSpeed={100}
                 element="h1"
+                disableBlinkingOnEnd={true}
                 />
+                {buttonHide()}
+                {typing1 ? null : (<TypingStep
+                  sequence={sequence1}
+                  cursorColor={'#fff'}
+                  typeSpeed={80}
+                  element="h1"
+                  />)
+                  }
       </div>
             <MyButton color={color}
+                botonHide={botonHide}
                 onMouseEnter={() => setColor("red")}
                 onMouseLeave={() => setColor("blue")}
             >Contáctame</MyButton>
