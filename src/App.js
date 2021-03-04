@@ -1,12 +1,9 @@
 import React from 'react';
-import Presentacion from './components/Presentacion';
+import Sidenav from './components/Sidenav';
 
 function App() {
   return (
-    <div className="contenedor"> 
-      <Presentacion/>
-    </div>
-    
+      <Sidenav/>
   );
 }
 

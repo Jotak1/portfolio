@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-import Sidenav from './components/Sidenav';
+import App from './App';
 
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Sidenav/>
+    <App/>
   </React.StrictMode>,
   document.getElementById('root')
 );

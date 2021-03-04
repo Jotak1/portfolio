@@ -13,11 +13,17 @@ body {
   /*141414*/
 }
 .contenedor{
-  display: flex !important;
+  display: flex ;
   background-color: #1d1d1d;
+  flex-flow: column;
+  flex-Grow: 1;
   /* color: #29f8ff; */
 }
 
 .erase{
   visibility: hidden;
+}
+
+h1{
+  color: #21CBF3;
 }

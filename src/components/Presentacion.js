@@ -3,12 +3,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import React, { useState } from "react";
 import { TypingStep } from "typing-effect-reactjs";
 import { Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   Titulo: {
     fontSize: "2rem",
     textAlign: "center",
     margin: "auto",
+    color: "#21CBF3",
   },
   Container: {
     display: "flex",
@@ -21,17 +23,21 @@ const useStyles = makeStyles({
   },
   Boton: {
     background: (props) =>
-      props.color === "red"
+      props.color === "green"
         ? "linear-gradient(45deg, #50e943 30%, #a6ff53 90%)"
         : "linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)",
     height: 48,
     width: 200,
     textAlign: "center",
-    transition: "background",
-    transitionDuration: 2,
+    color: "#fff",
+    fontWeight: "bold",
   },
   BotonHi: {
     visibility: "hidden",
+  },
+  linkst: {
+    color: '#fff',
+    textDecoration: "none", 
   },
 });
 
@@ -94,7 +100,7 @@ const sequence1 = [
     },
   },
   {
-    content: '<button className="sexyButton">\nContactame</button>',
+    content: '<button class="sexyButton">\nContactame</button>',
     config: {
       styleClass: "typing",
     },
@@ -127,7 +133,7 @@ const Presentacion = () => {
     setTimeout(() => {
       setBotonHide(false);
       setTyping1(true);
-    }, 12000);
+    }, 11500);
   };
   return (
     <div className={classes.Container}>
@@ -149,14 +155,16 @@ const Presentacion = () => {
           />
         )}
       </div>
+      <Link to="/contacto" className={classes.linkst}>
       <MyButton
         color={color}
         botonHide={botonHide}
-        onMouseEnter={() => setColor("red")}
+        onMouseEnter={() => setColor("green")}
         onMouseLeave={() => setColor("blue")}
+        
       >
         Contáctame
-      </MyButton>
+      </MyButton></Link>
     </div>
   );
 };
