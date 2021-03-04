@@ -18,7 +18,6 @@ import MailOutlineIcon from '@material-ui/icons/MailOutline';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import { ListItemIcon } from '@material-ui/core';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
@@ -88,8 +87,13 @@ const useStyles = makeStyles((theme) => ({
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
-    
   },
+  menupos:{
+    position: 'absolute',
+    top: 5,
+    right: 5,
+    color:"#fff",
+  }
 }));
 
 export default function PermanentDrawerLeft() {
@@ -99,12 +103,9 @@ export default function PermanentDrawerLeft() {
   
   const [open, setOpen] = React.useState(true);
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-
-  const handleDrawerClose = () => {
-    setOpen(false);
+  
+  const handleDrawer = () => {
+    setOpen(!open);
   };
   
   
@@ -115,10 +116,12 @@ export default function PermanentDrawerLeft() {
     else{
       setOpen(false);
     }
-  }, [matches])
+  }, [matches]);
   
   return (
     <div className={classes.root}>
+      <div className={classes.menupos}>{!matches? <IconButton onClick={handleDrawer}><MenuIcon className={classes.linkst}/></IconButton> :null}</div>
+
       <BrowserRouter>
       <Drawer
         className={classes.drawer}
@@ -130,11 +133,7 @@ export default function PermanentDrawerLeft() {
         open={open}
       > 
         <div className={classes.toolbar} />
-        <div className={classes.drawerHeader}>
-          { !matches ? 
-          <IconButton onClick={handleDrawerClose}><ChevronLeftIcon className={classes.linkst}/>
-          </IconButton>: null}
-        </div>
+        
         <Divider />
           <Link to='/' >
       
