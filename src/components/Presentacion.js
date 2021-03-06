@@ -1,9 +1,10 @@
 import "../index.css";
 import { makeStyles } from "@material-ui/core/styles";
-import React, { useState } from "react";
+import React, {  useState } from "react";
 import { TypingStep } from "typing-effect-reactjs";
 import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
+
 
 const useStyles = makeStyles({
   Titulo: {
@@ -36,8 +37,8 @@ const useStyles = makeStyles({
     visibility: "hidden",
   },
   linkst: {
-    color: '#fff',
-    textDecoration: "none", 
+    color: "#fff",
+    textDecoration: "none",
   },
 });
 
@@ -133,7 +134,7 @@ const Presentacion = () => {
     setTimeout(() => {
       setBotonHide(false);
       setTyping1(true);
-    }, 11500);
+    }, 11800);
   };
   return (
     <div className={classes.Container}>
@@ -154,17 +155,19 @@ const Presentacion = () => {
             element="h1"
           />
         )}
+        <Link to="/contacto" className={classes.linkst}>
+        <MyButton
+          color={color}
+          botonHide={botonHide}
+          onMouseEnter={() => setColor("green")}
+          onMouseLeave={() => setColor("blue")}
+        >
+          Contáctame
+        </MyButton>
+      </Link>
       </div>
-      <Link to="/contacto" className={classes.linkst}>
-      <MyButton
-        color={color}
-        botonHide={botonHide}
-        onMouseEnter={() => setColor("green")}
-        onMouseLeave={() => setColor("blue")}
-        
-      >
-        Contáctame
-      </MyButton></Link>
+      
+     
     </div>
   );
 };
