@@ -67,7 +67,7 @@ const Acerca = () => {
         <Grid item xs={12} sm={6}>
           <div className={classes.tagName}>
           <Slide direction="right" in={true}>
-        <TagCloud speed={1} tagName={tagName} radius={150} ></TagCloud>
+          <div id="clouder"/>
           </Slide>
         </div>
         </Grid>
