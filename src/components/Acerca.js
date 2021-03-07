@@ -2,13 +2,13 @@ import { Grid, Slide } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import { Typing } from "typing-effect-reactjs";
+import TagCloudW from './TagCloud';
 import "../index.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     textAlign: "justify",
-    margin: 10,
   },
   Titulo: {
     fontSize: "1.5rem",
@@ -38,7 +38,7 @@ const Acerca = () => {
             <Typing text={["Sobre mi"]} element="h1" cursorThickness={0} />
           </div>
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item  xs={12} md={4}>
           <Slide direction="right" in={true}>
             <p>
               Desarrollador Front-End situado en Chile, apasionado por la
@@ -54,10 +54,10 @@ const Acerca = () => {
             </p>
           </Slide>
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item  xs={12} md={8}>
           <div className={classes.tagstyle}>
             <Slide direction="right" in={true}>
-              <p>prueba</p>
+              <TagCloudW/>
             </Slide>
           </div>
         </Grid>

@@ -2,7 +2,8 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typing } from "typing-effect-reactjs";
 import "../index.css";
-import { Grid, Slide } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
+import CardProyectos from "./CardProyectos";
 
 const useStyles = makeStyles((theme) => ({
   Titulo: {
@@ -11,9 +12,30 @@ const useStyles = makeStyles((theme) => ({
   },
   Container: {
     color: "#fff",
-    // textAlign: 'justify'
   },
 }));
+
+const algunosProyectos = [
+  {
+    Titulo: "Somein",
+    Descripcion:
+      "Sitio responsivo desarrollado para empresa Metalmecanica desarrollado en Angular",
+    link: "https://www.somein.cl",
+    img: "/assets/proyectos/Somein.PNG",
+  },
+  {
+    Titulo: "Pokedex en React(Incompleta)",
+    Descripcion: "Pokedex desarrollada en React basado en la PokeApi",
+    link: "https://jotak1.github.io/pokedex-react",
+    img: "/assets/proyectos/PokedexReact.PNG",
+  },
+  {
+    Titulo: "Pokedex en Angular",
+    Descripcion: "Pokedex desarrollada en Angular basado en la PokeApi",
+    link: "https://jotak1.github.io/Pokedex/home",
+    img: "/assets/proyectos/PokedexAngular.PNG",
+  },
+];
 
 const Proyectos = () => {
   const classes = useStyles();
@@ -29,12 +51,12 @@ const Proyectos = () => {
               cursorThickness={0}
             />
           </div>
-          
         </Grid>
-        <Grid item xs={12} sm={12}>
-        <Slide direction="right" in={true}>
-            <p>Desde proyectos</p>
-          </Slide></Grid>
+        {algunosProyectos.map((proyecto, index) => (
+          <Grid key={index} item xs={12} sm={8} md={6} lg={4}>
+            <CardProyectos proyecto={proyecto} />
+          </Grid>
+        ))}
       </Grid>
     </div>
   );
