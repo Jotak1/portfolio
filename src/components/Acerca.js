@@ -42,14 +42,14 @@ const Acerca = () => {
           <Slide direction="right" in={true}>
             <p>
               Desarrollador Front-End situado en Chile, apasionado por la
-              tecnologia, la programacion y el desarrollo web,
+              tecnología, la programación y el desarrollo web.
             </p>
           </Slide>
           <Slide direction="right" in={true}>
             <p>
               Disponible para asumir nuevos desafíos, proactivo, me encanta
-              darle soluciones creativas a los problemas. Fanatico del deporte,
-              futbol, actividades al aire libre y el ajedrez. Persona de familia
+              darle soluciones creativas a los problemas. Fanático del deporte,
+              fútbol, actividades al aire libre y el ajedrez. Persona de familia
               y padre de una energica niña.
             </p>
           </Slide>

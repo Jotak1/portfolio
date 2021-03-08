@@ -122,7 +122,7 @@ export default function PermanentDrawerLeft() {
         ) : null}
       </div>
 
-      <BrowserRouter>
+      <BrowserRouter basename="/portfolio">
         <Drawer
           className={classes.drawer}
           variant="persistent"
@@ -143,7 +143,7 @@ export default function PermanentDrawerLeft() {
           <Link to="/">
             <Avatar
               alt="Jota"
-              src="/assets/jota.png"
+              src="./assets/jota.png"
               className={classes.large}
             />
           </Link>

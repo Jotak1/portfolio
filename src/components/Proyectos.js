@@ -19,21 +19,21 @@ const algunosProyectos = [
   {
     Titulo: "Somein",
     Descripcion:
-      "Sitio responsivo desarrollado para empresa Metalmecanica desarrollado en Angular",
+      "Sitio responsivo para empresa Metalmecanica desarrollado en Angular",
     link: "https://www.somein.cl",
-    img: "/assets/proyectos/Somein.PNG",
+    img: "./assets/proyectos/Somein.PNG",
   },
   {
     Titulo: "Pokedex en React(Incompleta)",
     Descripcion: "Pokedex desarrollada en React basado en la PokeApi",
     link: "https://jotak1.github.io/pokedex-react",
-    img: "/assets/proyectos/PokedexReact.PNG",
+    img: "./assets/proyectos/PokedexReact.PNG",
   },
   {
     Titulo: "Pokedex en Angular",
     Descripcion: "Pokedex desarrollada en Angular basado en la PokeApi",
     link: "https://jotak1.github.io/Pokedex/home",
-    img: "/assets/proyectos/PokedexAngular.PNG",
+    img: "./assets/proyectos/PokedexAngular.PNG",
   },
 ];
 

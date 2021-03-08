@@ -38,7 +38,7 @@ const Contacto = () => {
           <a href="mailto:jp.ausensi@gmail.com" className={classes.linkstl}>
             <img
               className={classes.media}
-              src="/assets/contacto/Gmail.png"
+              src="./assets/contacto/Gmail.png"
               alt="Gmail"
             />
             <p>jp.ausensi@gmail.com</p>
@@ -48,7 +48,7 @@ const Contacto = () => {
           <a href="https://www.linkedin.com/in/jpas/" className={classes.linkstl}>
             <img
               className={classes.media}
-              src="/assets/contacto/linkedin.png"
+              src="./assets/contacto/linkedin.png"
               alt="Linkedin"
             />
             <p>linkedin.com/in/jpas/</p>
@@ -58,7 +58,7 @@ const Contacto = () => {
           <a href="https://github.com/Jotak1" className={classes.linkstl}>
             <img
               className={classes.media}
-              src="/assets/contacto/github.png"
+              src="./assets/contacto/github.png"
               alt="Github"
             />
             <p>github.com/Jotak1</p>
