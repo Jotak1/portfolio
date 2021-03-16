@@ -1,7 +1,6 @@
 import { Grid, Slide } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
-import { Typing } from "typing-effect-reactjs";
 import TagCloudW from './TagCloud';
 import "../index.css";
 
@@ -35,7 +34,10 @@ const Acerca = () => {
       <Grid container direction="row" justify="center" alignItems="center">
         <Grid item xs={12} sm={12}>
           <div className={classes.Titulo}>
-            <Typing text={["Sobre mi"]} element="h1" cursorThickness={0} />
+          <Slide direction="right" in={true}>
+            <h1>Sobre mi</h1>
+
+          </Slide>
           </div>
         </Grid>
         <Grid item  xs={12} md={4}>

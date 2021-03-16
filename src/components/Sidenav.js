@@ -84,8 +84,9 @@ const useStyles = makeStyles((theme) => ({
   },
   menupos: {
     position: "absolute",
-    top: 5,
-    right: 5,
+    top: 0,
+    right: 0,
+    margin: "5px",
     color: "#fff",
   },
   
@@ -95,7 +96,7 @@ export default function PermanentDrawerLeft() {
   const classes = useStyles();
   const matches = useMediaQuery("(min-width:600px)");
 
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
 
   const handleDrawer = () => {
     setOpen(!open);
@@ -204,10 +205,10 @@ export default function PermanentDrawerLeft() {
           <Suspense fallback={<div>Loading...</div>}>
           <Switch>
             <Route path="/" exact>
-              <Presentacion />
+              <Presentacion matches={matches} />
             </Route>
             <Route path="/inicio">
-              <Presentacion />2
+              <Presentacion matches={matches} />
             </Route>
             <Route path="/acerca">
               <Acerca />

@@ -1,6 +1,6 @@
 import "../index.css";
 import { makeStyles } from "@material-ui/core/styles";
-import React, {  useState } from "react";
+import React, {  useState  } from "react";
 import { TypingStep } from "typing-effect-reactjs";
 import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
@@ -8,11 +8,17 @@ import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   Titulo: {
-    fontSize: "2rem",
     textAlign: "center",
     margin: "auto",
     color: "#21CBF3",
   },
+  TituloMob: {
+    fontSize: "1.2rem",
+  },
+  TituloDesk: {
+    fontSize: "2rem",
+  },
+  
   Container: {
     display: "flex",
     flexFlow: "column",
@@ -101,7 +107,7 @@ const sequence1 = [
     },
   },
   {
-    content: '<button class="sexyButton">\nContactame</button>',
+    content: '<button class= "sexyButton" > Contactame </button>',
     config: {
       styleClass: "typing",
     },
@@ -124,21 +130,23 @@ function MyButton(props) {
   }
 }
 
-const Presentacion = () => {
+
+const Presentacion = ({matches}) => {
   const [color, setColor] = useState("blue");
   const [botonHide, setBotonHide] = useState(true);
   const [typing1, setTyping1] = useState(false);
   const classes = useStyles();
 
+
   const buttonHide = () => {
     setTimeout(() => {
       setBotonHide(false);
       setTyping1(true);
-    }, 11800);
+    }, 12000);
   };
   return (
     <div className={classes.Container}>
-      <div className={classes.Titulo}>
+      <div className={`${classes.Titulo} ${!matches? classes.TituloMob : classes.TituloDesk}` }>
         <TypingStep
           sequence={sequence}
           cursorColor={"#fff"}
