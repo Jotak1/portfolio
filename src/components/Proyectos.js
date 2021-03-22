@@ -19,7 +19,7 @@ const algunosProyectos = [
   {
     Titulo: "Cotizador Criptomonedas",
     Descripcion:
-      "Sitio responsivo para cotizar el top 10 de criptomonedas en algunas monedas internacionales",
+      "Sitio para cotizar el top 10 de criptomonedas en algunas monedas internacionales",
     link: "https://jotak1.github.io/criptomonedas/",
     img: "./assets/proyectos/Criptomonedas.PNG",
   },
