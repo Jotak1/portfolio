@@ -17,6 +17,27 @@ const useStyles = makeStyles((theme) => ({
 
 const algunosProyectos = [
   {
+    Titulo: "Cotizador Criptomonedas",
+    Descripcion:
+      "Sitio responsivo para cotizar el top 10 de criptomonedas en algunas monedas internacionales",
+    link: "https://jotak1.github.io/criptomonedas/",
+    img: "./assets/proyectos/Criptomonedas.PNG",
+  },
+  {
+    Titulo: "Buscador de Letras",
+    Descripcion:
+      "Sitio responsivo para buscar la letra de una cancion junto con la informacion del artista",
+    link: "https://jotak1.github.io/letras/",
+    img: "./assets/proyectos/Canciones.PNG",
+  },
+  {
+    Titulo: "Recetas Bebidas",
+    Descripcion:
+      "Sitio responsivo para buscar la receta de una bebida de acuerdo a su categoria e ingrediente",
+    link: "https://jotak1.github.io/bebidas/",
+    img: "./assets/proyectos/Bebidas.PNG",
+  },
+  {
     Titulo: "Somein",
     Descripcion:
       "Sitio responsivo para empresa Metalmecanica desarrollado en Angular",
