@@ -17,9 +17,16 @@ const useStyles = makeStyles((theme) => ({
 
 const algunosProyectos = [
   {
+    Titulo: "World Map Holiday",
+    Descripcion:
+      "Sitio para ver los feriados de cada pais en el año actual",
+    link: "https://jotak1.github.io/worldmapholiday/",
+    img: "./assets/proyectos/WMH.PNG",
+  },
+  {
     Titulo: "Cotizador Criptomonedas",
     Descripcion:
-      "Sitio para cotizar el top 10 de criptomonedas en algunas monedas internacionales",
+      "Sitio para cotizar 10 criptomonedas en algunas monedas internacionales",
     link: "https://jotak1.github.io/criptomonedas/",
     img: "./assets/proyectos/Criptomonedas.PNG",
   },
