@@ -52,7 +52,7 @@ const algunosProyectos = [
     img: "./assets/proyectos/Somein.PNG",
   },
   {
-    Titulo: "Pokedex en React(Incompleta)",
+    Titulo: "Pokedex en React(En Construcción)",
     Descripcion: "Pokedex desarrollada en React basado en la PokeApi",
     link: "https://jotak1.github.io/pokedex-react",
     img: "./assets/proyectos/PokedexReact.PNG",
