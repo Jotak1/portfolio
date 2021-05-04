@@ -83,19 +83,7 @@ const sequence1 = [
     },
   },
   {
-    content: "Contrata",
-    config: {
-      styleClass: "typing",
-    },
-  },
-  {
-    content: -4,
-    config: {
-      styleClass: "wrong",
-    },
-  },
-  {
-    content: "actame",
+    content: "contactame",
     config: {
       styleClass: "typing",
     },
@@ -107,7 +95,7 @@ const sequence1 = [
     },
   },
   {
-    content: '<button class= "sexyButton" > Contactame </button>',
+    content: '<button class= "greenButton" > Contactame </button>',
     config: {
       styleClass: "typing",
     },
@@ -142,7 +130,7 @@ const Presentacion = ({matches}) => {
     setTimeout(() => {
       setBotonHide(false);
       setTyping1(true);
-    }, 12000);
+    }, 11500);
   };
   return (
     <div className={classes.Container}>
