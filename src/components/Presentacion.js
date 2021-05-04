@@ -95,7 +95,7 @@ const sequence1 = [
     },
   },
   {
-    content: '<button class= "greenButton" > Contactame </button>',
+    content: '<button class= "contactButton" > Contactame </button>',
     config: {
       styleClass: "typing",
     },
