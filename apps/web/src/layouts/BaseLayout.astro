@@ -1,0 +1,41 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  bodyClass?: string;
+  /** Pass true on Resonancia to reduce accidental zoom while dragging. */
+  lockViewport?: boolean;
+}
+
+const {
+  title,
+  description = 'Portafolio de Juan Pablo Ausensi — desarrollador full-stack. Expediente + Resonancia.',
+  bodyClass = '',
+  lockViewport = false,
+} = Astro.props;
+
+const base = import.meta.env.BASE_URL;
+---
+
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content={lockViewport
+        ? 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
+        : 'width=device-width, initial-scale=1'}
+    />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0c1018" />
+    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+    <title>{title}</title>
+    <script is:inline define:vars={{ base }}>
+      window.__BASE__ = base;
+    </script>
+  </head>
+  <body class={bodyClass}>
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/pages/index.css';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="Inicio · Juan Pablo Ausensi" bodyClass="" scrollTrigger={false}>
+<div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+  <div class="container">
+    <header class="topnav reveal" data-od-id="topnav">
+      <a class="logo" href={base} data-od-id="logo">Juan Pablo Ausensi</a>
+      <span class="meta" data-od-id="role-meta">Full-Stack · Chile</span>
+    </header>
+
+    <section class="hero" data-od-id="hero">
+      <p class="eyebrow reveal">Portafolio · Full-Stack</p>
+      <h1 data-od-id="hero-title">
+        <span class="title-line" id="title-l1">Léeme.</span>
+        <span class="title-line" id="title-l2">O sintoniza.</span>
+      </h1>
+      <p class="lead reveal">Expediente para leer rápido. Resonancia para jugar con la señal. Full-stack en Chile.</p>
+    </section>
+
+    <section class="views" data-od-id="views">
+      <a class="view-card reveal" href={`${base}expediente/`} data-transition-label="Expediente" data-od-id="card-expediente">
+        <div class="view-visual dossier" aria-hidden="true">
+          <div class="doc-block">
+            <div class="doc-line" style="width:70%"></div>
+            <div class="doc-line"></div>
+            <div class="doc-line short"></div>
+            <div class="doc-line" style="width:85%;margin-top:18px"></div>
+            <div class="doc-line short"></div>
+            <div class="doc-line" style="width:60%"></div>
+          </div>
+          <div class="doc-aside">
+            <span class="meta" style="color: var(--accent);">Resumen</span>
+            <div>
+              <div class="doc-line" style="background: color-mix(in oklch, var(--accent) 40%, transparent);"></div>
+              <div class="doc-line short"></div>
+            </div>
+          </div>
+        </div>
+        <div class="view-body">
+          <p class="meta" style="margin-bottom: 8px; color: var(--muted);">Vista 01 · Lectura</p>
+          <h2>Expediente</h2>
+          <p>Resumen claro: bio, trayectoria y contacto.</p>
+          <span class="btn btn-secondary">Abrir expediente</span>
+        </div>
+      </a>
+
+      <a class="view-card reveal" href={`${base}resonancia/`} data-transition-label="Resonancia" data-od-id="card-resonancia">
+        <div class="view-visual game" aria-hidden="true">
+          <div class="wave-stage" id="wave-stage">
+            <svg viewBox="0 0 280 120" preserveAspectRatio="xMidYMid meet">
+              <defs>
+                <linearGradient id="wave-grad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.35" />
+                  <stop offset="100%" stop-color="var(--accent)" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+              <path class="wave-ghost" id="preview-wave-ghost" d="" />
+              <path class="wave-fill" id="preview-wave-fill" d="" />
+              <path class="wave-harm" id="preview-wave-harm" d="" />
+              <path class="wave-path" id="preview-wave" d="" />
+            </svg>
+          </div>
+        </div>
+        <div class="view-body">
+          <p class="meta" style="margin-bottom: 8px; color: var(--muted);">Vista 02 · Juego</p>
+          <h2>Resonancia</h2>
+          <p>Ajusta frecuencia y amplitud. Captura señales de mi historia.</p>
+          <span class="btn btn-primary">Entrar a Resonancia</span>
+        </div>
+      </a>
+    </section>
+
+    <footer class="foot reveal" data-od-id="footer">
+      <span>© 2026 Juan Pablo Ausensi</span>
+      <span>
+        <a href="mailto:jp.ausensi@gmail.com">jp.ausensi@gmail.com</a>
+        ·
+        <a href="https://github.com/Jotak1" target="_blank" rel="noopener">GitHub</a>
+      </span>
+    </footer>
+  </div>
+</BaseLayout>
+
+<script>
+  import { bootMotion } from '../scripts/boot.ts';
+  import { initIndexPage } from '../scripts/index-page.js';
+  bootMotion({ scrollTrigger: false }).then(() => initIndexPage());
+</script>

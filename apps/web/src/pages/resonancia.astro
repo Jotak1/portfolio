@@ -1,0 +1,86 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/pages/resonancia.css';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="Resonancia · Juan Pablo Ausensi" bodyClass="" scrollTrigger={false} lockViewport={true}>
+<div id="stage" data-od-id="stage">
+    <div id="ambient" aria-hidden="true"></div>
+    <div id="wave-wrap" data-od-id="wave-wrap">
+      <svg viewBox="0 0 900 340" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <linearGradient id="waveGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.55" />
+            <stop offset="100%" stop-color="var(--accent)" stop-opacity="0" />
+          </linearGradient>
+        </defs>
+        <circle class="core-ring" cx="450" cy="170" r="54" id="ring-outer" />
+        <circle class="core-ring" cx="450" cy="170" r="28" id="ring-inner" />
+        <circle class="core-dot" cx="450" cy="170" r="6" id="core-dot" />
+        <g id="particles"></g>
+        <path class="wave-target" id="wave-target" d="" />
+        <path class="wave-fill" id="wave-fill" d="" />
+        <path class="wave-live" id="wave-live" d="" />
+      </svg>
+    </div>
+  </div>
+  <div class="flash" id="flash" aria-hidden="true"></div>
+  <div class="capture-banner" id="capture-banner" aria-hidden="true">Señal capturada</div>
+
+  <div id="ui" data-od-id="ui">
+    <div class="topbar" data-od-id="topbar">
+      <div class="brand" data-od-id="brand">Resonancia · señal</div>
+      <div class="links">
+        <span class="pill" data-od-id="progress-pill">Señales <strong id="progress-num">0</strong>/5</span>
+        <a href={`${base}expediente/`} data-transition-label="Expediente" data-od-id="link-expediente">Expediente</a>
+        <a href={base} data-transition-label="Inicio" data-od-id="link-home">Inicio</a>
+      </div>
+    </div>
+
+    <div class="hud" data-od-id="hud">
+      <aside class="panel" data-od-id="tuner">
+        <p class="eyebrow">Sintonizador</p>
+        <h2 id="target-title">Señal 01 · Identidad</h2>
+        <p class="muted" id="target-hint">Arrastra o usa las teclas para alinear frecuencia y amplitud. Mantén el bloqueo para capturar.</p>
+
+        <div style="margin-top:18px">
+          <div class="meter-label"><span>Frecuencia</span><span class="num" id="freq-val">0.42</span></div>
+          <div class="meter target-mark" id="freq-meter" style="--target: 58%"><i id="freq-fill"></i></div>
+          <div class="meter-label"><span>Amplitud</span><span class="num" id="amp-val">0.35</span></div>
+          <div class="meter target-mark" id="amp-meter" style="--target: 40%"><i id="amp-fill"></i></div>
+          <div class="meter-label"><span>Bloqueo</span><span id="lock-label">fuera de banda</span></div>
+          <div class="lockbar"><i id="lock-fill"></i></div>
+        </div>
+
+        <div class="signals" id="signal-list" data-od-id="signal-list"></div>
+      </aside>
+
+      <div class="hud-center">
+        <div class="center-hint" id="center-hint" data-od-id="center-hint">
+          <strong>Sintoniza la onda</strong> · captura señales de mi historia
+        </div>
+      </div>
+
+      <aside class="panel tx-panel" id="tx-panel" data-od-id="tx-panel" aria-live="polite"></aside>
+    </div>
+
+    <div class="bottom" data-od-id="bottom">
+      <div class="controls">
+        <div><kbd>A</kbd><kbd>D</kbd> / arrastrar X — frecuencia</div>
+        <div><kbd>W</kbd><kbd>S</kbd> / arrastrar Y — amplitud</div>
+        <div><kbd>Espacio</kbd> — pulso · <kbd>N</kbd> — siguiente · el sonido crece al sintonizar</div>
+      </div>
+      <div class="controls" id="status-line">Onda en espera…</div>
+    </div>
+  </div>
+
+  <div id="fallback" data-od-id="fallback"></div>
+</BaseLayout>
+
+<script>
+  import { bootMotion } from '../scripts/boot.ts';
+  import { initResonanciaPage } from '../scripts/resonancia-page.js';
+  bootMotion({ scrollTrigger: false }).then(() => initResonanciaPage());
+</script>

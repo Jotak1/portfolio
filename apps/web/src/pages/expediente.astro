@@ -1,0 +1,221 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/pages/expediente.css';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="Expediente · Juan Pablo Ausensi" bodyClass="" scrollTrigger={true}>
+  <a class="skip-link" href="#content">Saltar al contenido</a>
+  <div class="progress" id="scroll-progress" role="progressbar" aria-hidden="true"></div>
+
+  <header class="topnav" data-od-id="topnav">
+    <div class="container topnav-inner">
+      <a class="logo" href={base} data-transition-label="Inicio" data-od-id="logo">Juan Pablo Ausensi</a>
+      <nav aria-label="Secciones del expediente">
+        <a href="#trayectoria" data-od-id="nav-trayectoria">Trayectoria</a>
+        <a href="#stack" data-od-id="nav-stack">Stack</a>
+        <a href="#contacto" data-od-id="nav-contacto">Contacto</a>
+      </nav>
+      <div class="topnav-actions" data-od-id="topnav-actions">
+        <a class="btn btn-secondary" href={`${base}resonancia/`} data-transition-label="Resonancia" data-od-id="nav-resonancia">Vista Resonancia</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="content" tabindex="-1">
+    <section class="section hero" data-od-id="hero" aria-labelledby="hero-title">
+      <div class="container hero-split">
+        <div>
+          <p class="eyebrow">Expediente · lectura</p>
+          <h1 data-od-id="hero-title" id="hero-title">
+            <span id="title-l1">Hola, soy</span>
+            <span id="title-l2" style="display:block">Juan Pablo.</span>
+          </h1>
+          <p class="lead" style="margin-top: 20px;">Desarrollador full-stack en Chile. Construyo sistemas que aguantan producción y me gusta seguir aprendiendo.</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href={`${base}resonancia/`} data-transition-label="Resonancia" data-od-id="cta-resonancia">Entrar a Resonancia</a>
+            <a class="btn btn-ghost btn-arrow" href="#trayectoria" data-od-id="cta-leer">Ver trayectoria</a>
+          </div>
+        </div>
+        <aside class="signal-card" data-od-id="signal-preview" aria-label="Señal activa: Full-Stack, INACAP 2019, Correos Chile">
+          <div>
+            <p class="meta">Señal activa</p>
+            <p style="font-family: var(--font-display); font-size: 28px; margin-top: 10px; letter-spacing: -0.02em;">Full-Stack · INACAP 2019</p>
+          </div>
+          <div class="signal-wave" data-od-id="signal-wave" aria-hidden="true">
+            <svg viewBox="0 0 280 120" preserveAspectRatio="xMidYMid meet" focusable="false">
+              <defs>
+                <linearGradient id="signal-wave-grad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.35" />
+                  <stop offset="100%" stop-color="var(--accent)" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+              <path class="wave-ghost" id="hero-wave-ghost" d="" />
+              <path class="wave-fill" id="hero-wave-fill" d="" />
+              <path class="wave-harm" id="hero-wave-harm" d="" />
+              <path class="wave-path" id="hero-wave" d="" />
+            </svg>
+          </div>
+          <p class="meta">Correos Chile · ene 2025 – actualidad</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" data-od-id="bio" aria-labelledby="bio-title">
+      <div class="container grid-2-1">
+        <div class="stack reveal" style="gap: 20px; max-width: 54ch;">
+          <p class="eyebrow" style="color: var(--muted);">Quién soy</p>
+          <h2 id="bio-title">Ingeniería electrónica, software en producción y vida fuera de la pantalla.</h2>
+          <p class="lead">Ingeniero en Electrónica (INACAP, 2019). Me gusta el desarrollo web: problemas nuevos, aprendizaje continuo y equipos reales.</p>
+          <p style="color: var(--muted);">Padre de familia. Me gusta el deporte, estar al aire libre y el ajedrez — el mismo rigor de una partida lo llevo al código.</p>
+        </div>
+        <aside class="card reveal" data-od-id="bio-side" aria-label="Perfil resumido">
+          <p class="meta" style="margin-bottom: 8px;">Perfil</p>
+          <div class="stack" style="gap: 0;">
+            <div class="profile-row">
+              <p class="meta">Rol</p>
+              <p>Desarrollador Full-Stack</p>
+            </div>
+            <div class="profile-row">
+              <p class="meta">Ubicación</p>
+              <p>Chile</p>
+            </div>
+            <div class="profile-row">
+              <p class="meta">Educación</p>
+              <p>Ingeniería Electrónica · INACAP 2019</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="timeline-section" data-od-id="trayectoria" id="trayectoria" aria-label="Trayectoria profesional">
+      <div class="timeline-pin" id="timeline-pin">
+        <div class="timeline-hud">
+          <p class="eyebrow" style="color: var(--muted); margin-bottom: 4px;">Trayectoria · 2019 – hoy</p>
+          <div class="timeline-year num" id="timeline-year" aria-live="polite">2025</div>
+          <div class="timeline-meta">
+            <p class="meta" id="timeline-label">Correos Chile</p>
+            <p class="meta" aria-hidden="true"><span id="timeline-idx">01</span> / 05</p>
+          </div>
+        </div>
+        <div class="timeline-track" id="timeline-track">
+          <article class="timeline-card" data-year="2025" data-label="Correos Chile" data-od-id="exp-correos">
+            <div>
+              <p class="role">2025 – hoy · Full-Stack</p>
+              <h3>Correos Chile</h3>
+              <p>Modernización de sistemas internos con NestJS, Node.js, React y Vue. Optimización de queries SQL en PostgreSQL y Oracle.</p>
+            </div>
+            <p class="meta">Rol actual</p>
+          </article>
+          <article class="timeline-card" data-year="2023" data-label="Amicar S.A." data-od-id="exp-amicar">
+            <div>
+              <p class="role">2023 – 2025 · Full-Stack</p>
+              <h3>Amicar S.A.</h3>
+              <p>Sistema en React y Node.js con MongoDB y PostgreSQL. Soporte e incidencias en producción.</p>
+            </div>
+            <p class="meta">Producción · fintech / crédito</p>
+          </article>
+          <article class="timeline-card" data-year="2022" data-label="Natural Phone" data-od-id="exp-natural">
+            <div>
+              <p class="role">2022 – 2023 · Front-End</p>
+              <h3>Natural Phone S.A.</h3>
+              <p>Apps móviles con React Native y sitios web con Vue.js.</p>
+            </div>
+            <p class="meta">Mobile + web</p>
+          </article>
+          <article class="timeline-card" data-year="2021" data-label="Haibu / VTR" data-od-id="exp-haibu">
+            <div>
+              <p class="role">2021 – 2022 · Full-Stack</p>
+              <h3>Haibu Solutions</h3>
+              <p>Apps móviles para células de técnicos, ventas y clientes VTR (Ionic, Angular, Node.js, Scrum).</p>
+            </div>
+            <p class="meta">Telecom · campo</p>
+          </article>
+          <article class="timeline-card" data-year="2019" data-label="Soc. Mecánica" data-od-id="exp-mecanica">
+            <div>
+              <p class="role">2019 – 2021 · Ingeniería + desarrollo</p>
+              <h3>Soc. Mecánica e Ingeniería</h3>
+              <p>Sistemas eléctricos/electrónicos y sistemas internos con Angular y REST API (Node.js, Express, MongoDB).</p>
+            </div>
+            <p class="meta">Origen · electrónica + software</p>
+          </article>
+        </div>
+        <div class="timeline-rail" aria-hidden="true"><i id="timeline-fill"></i></div>
+      </div>
+    </section>
+
+    <section class="section" data-od-id="stack" id="stack" aria-labelledby="stack-title">
+      <div class="container stack" style="gap: 40px;">
+        <div class="reveal" style="max-width: 36ch;">
+          <p class="eyebrow" style="color: var(--muted);">Stack</p>
+          <h2 id="stack-title">Herramientas con las que construyo.</h2>
+        </div>
+        <div class="grid-3">
+          <div class="card reveal" data-od-id="stack-front">
+            <p class="meta" style="margin-bottom: 12px;">Front</p>
+            <div class="chips" style="margin-top:0">
+              <span class="tag">React</span><span class="tag">Vue</span><span class="tag">Angular</span>
+              <span class="tag">React Native</span><span class="tag">Ionic</span>
+              <span class="tag">TypeScript</span><span class="tag">HTML5 / CSS3</span>
+            </div>
+          </div>
+          <div class="card reveal" data-od-id="stack-back">
+            <p class="meta" style="margin-bottom: 12px;">Back</p>
+            <div class="chips" style="margin-top:0">
+              <span class="tag">Node.js</span><span class="tag">NestJS</span><span class="tag">Express</span>
+              <span class="tag">Bun</span><span class="tag">PostgreSQL</span>
+              <span class="tag">MongoDB</span><span class="tag">Oracle</span>
+            </div>
+          </div>
+          <div class="card reveal" data-od-id="stack-ops">
+            <p class="meta" style="margin-bottom: 12px;">Ops &amp; craft</p>
+            <div class="chips" style="margin-top:0">
+              <span class="tag">Docker</span><span class="tag">Git</span><span class="tag">Scrum</span>
+              <span class="tag">APIs REST</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" data-od-id="quote" aria-label="Cita">
+      <div class="container reveal" style="max-width: 760px;">
+        <div class="quote-mark" aria-hidden="true">"</div>
+        <blockquote class="quote" id="quote-text">Prefiero un sistema que aguante el lunes en producción a una demo que brilla el viernes.</blockquote>
+        <p class="quote-author">— Juan Pablo · sobre cómo elijo qué construir</p>
+      </div>
+    </section>
+
+    <section class="section" data-od-id="contacto" id="contacto" style="text-align: center;" aria-labelledby="contacto-title">
+      <div class="container reveal" style="max-width: 560px;">
+        <p class="eyebrow" style="color: var(--muted);">Contacto</p>
+        <h2 id="contacto-title">¿Hablamos?</h2>
+        <p class="lead" style="margin: 16px auto 28px;">Abierto a proyectos full-stack, modernizar sistemas y equipos que necesiten front y back.</p>
+        <div class="hero-cta" style="justify-content: center;">
+          <a class="btn btn-primary" href="mailto:jp.ausensi@gmail.com" data-od-id="cta-mail">jp.ausensi@gmail.com</a>
+          <a class="btn btn-secondary" href="tel:+56927366163" data-od-id="cta-phone" aria-label="Llamar al +56 9 2736 6163">+56 9 2736 6163</a>
+        </div>
+        <div class="chips" style="justify-content: center; margin-top: 24px;" role="list">
+          <a class="tag" role="listitem" href="https://www.linkedin.com/in/jpas/" target="_blank" rel="noopener noreferrer" data-od-id="link-linkedin" aria-label="LinkedIn (se abre en una pestaña nueva)">LinkedIn</a>
+          <a class="tag" role="listitem" href="https://github.com/Jotak1" target="_blank" rel="noopener noreferrer" data-od-id="link-github" aria-label="GitHub (se abre en una pestaña nueva)">GitHub</a>
+          <a class="tag" role="listitem" href={`${base}resonancia/`} data-transition-label="Resonancia" data-od-id="link-resonancia">Probar Resonancia</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pagefoot" data-od-id="footer">
+    <div class="container row-between" style="flex-wrap: wrap;">
+      <span>© 2026 Juan Pablo Ausensi</span>
+      <span class="meta">Expediente · Chile</span>
+    </div>
+  </footer>
+</BaseLayout>
+
+<script>
+  import { bootMotion } from '../scripts/boot.ts';
+  import { initExpedientePage } from '../scripts/expediente-page.js';
+  bootMotion({ scrollTrigger: true }).then(() => initExpedientePage());
+</script>

@@ -1,70 +1,60 @@
-# Getting Started with Create React App
+# Portafolio — Juan Pablo Ausensi
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Sitio personal con **Bun + Astro**: doble vista **Expediente** (resumen GSAP) + **Resonancia** (juego + audio reactivo + View Transitions).
 
-## Available Scripts
+Deploy: [jotak1.github.io/portfolio](https://jotak1.github.io/portfolio/)
 
-In the project directory, you can run:
+## Requisitos
 
-### `npm start`
+- [Bun](https://bun.sh) ≥ 1.1
+- Node ≥ 22 (Astro lo pide)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Arranque
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```bash
+bun install
+bun run dev
+```
 
-### `npm test`
+Abre `http://localhost:4321/portfolio/` (el `base` apunta a GitHub Pages).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+| Ruta | Qué es |
+|---|---|
+| `/portfolio/` | Launcher (dos vistas) |
+| `/portfolio/expediente/` | Resumen + trayectoria con ScrollTrigger |
+| `/portfolio/resonancia/` | Juego de sintonía GSAP + Web Audio |
 
-### `npm run build`
+## Scripts
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+bun run dev        # Astro dev
+bun run build      # salida en apps/web/dist
+bun run preview    # preview del build
+bun run deploy     # build + gh-pages → rama gh-pages
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Estructura
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+portfolio/
+├── apps/web/                 # Astro site
+│   ├── src/pages/            # index, expediente, resonancia
+│   ├── src/scripts/          # motion + boot + page logic
+│   ├── src/styles/pages/     # CSS
+│   └── src/content/          # profile.ts (CV estructurado)
+└── packages/content-schema/  # tipos compartidos
+```
 
-### `npm run eject`
+## Deploy (mismo repo)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+El CRA antiguo quedó en la rama `legacy-cra`. En `main` vive Astro con `base: '/portfolio/'`.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+bun run deploy
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Publica `apps/web/dist` a la rama `gh-pages` (incluye `.nojekyll`).
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Origen del diseño
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Prototipado en Open Design (Expediente + Resonancia + GSAP) y montado aquí para desplegar en el mismo GitHub Pages de siempre.
