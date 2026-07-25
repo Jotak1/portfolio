@@ -57,8 +57,9 @@
       fill: none;
       stroke: color-mix(in oklch, var(--accent) 45%, transparent);
       stroke-width: 1.5;
+      opacity: 0;
     }
-    .core-dot { fill: var(--accent); }
+    .core-dot { fill: var(--accent); opacity: 0; }
     .particle { fill: var(--accent); opacity: 0.55; }
 
     #ambient {

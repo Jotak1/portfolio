@@ -9,6 +9,14 @@ declare global {
     // Shared motion helpers (curtain, VT, audio, split…)
     Motion: any;
     __BASE__?: string;
+    __SIGNALS__?: Array<{
+      id: string;
+      title: string;
+      short: string;
+      freq: number;
+      amp: number;
+      body: string;
+    }>;
   }
 }
 

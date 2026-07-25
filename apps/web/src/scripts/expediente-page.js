@@ -235,13 +235,6 @@ export function initExpedientePage() {
     });
   });
 
-  const quoteWords = Motion.splitWords(document.getElementById('quote-text'));
-  gsap.set(quoteWords, { yPercent: 110, opacity: 0 });
-  gsap.to(quoteWords, {
-    yPercent: 0, opacity: 1, duration: 0.55, stagger: 0.04, ease: 'power3.out',
-    scrollTrigger: { trigger: '[data-od-id="quote"]', start: 'top 70%' }
-  });
-
   gsap.to(progress, {
     width: '100%', ease: 'none',
     scrollTrigger: {

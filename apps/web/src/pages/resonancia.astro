@@ -1,11 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { profile } from '../content/profile';
+import { buildSignals } from '../content/signals';
 import '../styles/pages/resonancia.css';
 
 const base = import.meta.env.BASE_URL;
+const signals = buildSignals(profile, base);
 ---
 
-<BaseLayout title="Resonancia · Juan Pablo Ausensi" bodyClass="" scrollTrigger={false} lockViewport={true}>
+<BaseLayout title={`Resonancia · ${profile.name}`} description={profile.seoDescription} bodyClass="" lockViewport={true}>
 <div id="stage" data-od-id="stage">
     <div id="ambient" aria-hidden="true"></div>
     <div id="wave-wrap" data-od-id="wave-wrap">
@@ -79,6 +82,9 @@ const base = import.meta.env.BASE_URL;
   <div id="fallback" data-od-id="fallback"></div>
 </BaseLayout>
 
+<script is:inline define:vars={{ signals }}>
+  window.__SIGNALS__ = signals;
+</script>
 <script>
   import { bootMotion } from '../scripts/boot.ts';
   import { initResonanciaPage } from '../scripts/resonancia-page.js';

@@ -1,11 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { profile } from '../content/profile';
 import '../styles/pages/index.css';
 
 const base = import.meta.env.BASE_URL;
+const { home, name, email, links } = profile;
 ---
 
-<BaseLayout title="Inicio · Juan Pablo Ausensi" bodyClass="page-home" scrollTrigger={false}>
+<BaseLayout title={`Inicio · ${name}`} description={profile.seoDescription} bodyClass="page-home">
   <canvas
     id="halftone-canvas"
     class="halftone-canvas"
@@ -15,17 +17,17 @@ const base = import.meta.env.BASE_URL;
   <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
   <div class="container">
     <header class="topnav reveal" data-od-id="topnav">
-      <a class="logo" href={base} data-od-id="logo">Juan Pablo Ausensi</a>
-      <span class="meta" data-od-id="role-meta">Full-Stack · Chile</span>
+      <a class="logo" href={base} data-od-id="logo">{name}</a>
+      <span class="meta" data-od-id="role-meta">{home.roleMeta}</span>
     </header>
 
     <section class="hero" data-od-id="hero">
-      <p class="eyebrow reveal">Portafolio · Full-Stack</p>
+      <p class="eyebrow reveal">{home.eyebrow}</p>
       <h1 data-od-id="hero-title">
-        <span class="title-line" id="title-l1">Léeme.</span>
-        <span class="title-line" id="title-l2">O sintoniza.</span>
+        <span class="title-line" id="title-l1">{home.titleLine1}</span>
+        <span class="title-line" id="title-l2">{home.titleLine2}</span>
       </h1>
-      <p class="lead reveal">Expediente para leer rápido. Resonancia para jugar con la señal. Full-stack en Chile.</p>
+      <p class="lead reveal">{home.lead}</p>
     </section>
 
     <section class="views" data-od-id="views">
@@ -50,7 +52,7 @@ const base = import.meta.env.BASE_URL;
         <div class="view-body">
           <p class="meta" style="margin-bottom: 8px; color: var(--muted);">Vista 01 · Lectura</p>
           <h2>Expediente</h2>
-          <p>Resumen claro: bio, trayectoria y contacto.</p>
+          <p>{home.expedienteCard}</p>
           <span class="btn btn-secondary">Abrir expediente</span>
         </div>
       </a>
@@ -75,18 +77,18 @@ const base = import.meta.env.BASE_URL;
         <div class="view-body">
           <p class="meta" style="margin-bottom: 8px; color: var(--muted);">Vista 02 · Juego</p>
           <h2>Resonancia</h2>
-          <p>Ajusta frecuencia y amplitud. Captura señales de mi historia.</p>
+          <p>{home.resonanciaCard}</p>
           <span class="btn btn-primary">Entrar a Resonancia</span>
         </div>
       </a>
     </section>
 
     <footer class="foot reveal" data-od-id="footer">
-      <span>© 2026 Juan Pablo Ausensi</span>
+      <span>© 2026 {name}</span>
       <span>
-        <a href="mailto:jp.ausensi@gmail.com">jp.ausensi@gmail.com</a>
+        <a href={`mailto:${email}`}>{email}</a>
         ·
-        <a href="https://github.com/Jotak1" target="_blank" rel="noopener">GitHub</a>
+        <a href={links.github} target="_blank" rel="noopener">GitHub</a>
       </span>
     </footer>
   </div>
