@@ -1,8 +1,8 @@
 # @portfolio/web
 
-Astro app del portafolio. Ver el [README raíz](../../README.md).
+App Astro del portafolio. Documentación completa en el [README raíz](../../README.md).
 
 ```bash
-# desde portfolio-v2/
+# desde la raíz del monorepo
 bun run dev
 ```
