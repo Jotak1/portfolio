@@ -11,7 +11,7 @@ export function initIndexPage() {
       Motion.playEnter();
       Motion.bindInternalLinks();
       Motion.ensureMuteButton(document.querySelector('.topnav'));
-  
+
       const reduced = Motion.prefersReduced();
       const cards = gsap.utils.toArray('.view-card');
       const lines = gsap.utils.toArray('.doc-line');

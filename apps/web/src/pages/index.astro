@@ -5,8 +5,14 @@ import '../styles/pages/index.css';
 const base = import.meta.env.BASE_URL;
 ---
 
-<BaseLayout title="Inicio · Juan Pablo Ausensi" bodyClass="" scrollTrigger={false}>
-<div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+<BaseLayout title="Inicio · Juan Pablo Ausensi" bodyClass="page-home" scrollTrigger={false}>
+  <canvas
+    id="halftone-canvas"
+    class="halftone-canvas"
+    data-od-id="halftone-canvas"
+    aria-hidden="true"
+  ></canvas>
+  <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
   <div class="container">
     <header class="topnav reveal" data-od-id="topnav">
       <a class="logo" href={base} data-od-id="logo">Juan Pablo Ausensi</a>
@@ -89,5 +95,10 @@ const base = import.meta.env.BASE_URL;
 <script>
   import { bootMotion } from '../scripts/boot.ts';
   import { initIndexPage } from '../scripts/index-page.js';
-  bootMotion({ scrollTrigger: false }).then(() => initIndexPage());
+  import { initHalftoneDrift } from '../scripts/halftone-drift.js';
+
+  bootMotion({ scrollTrigger: false }).then(() => {
+    initHalftoneDrift(document.getElementById('halftone-canvas') as HTMLCanvasElement | null);
+    initIndexPage();
+  });
 </script>
