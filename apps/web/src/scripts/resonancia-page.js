@@ -11,7 +11,10 @@ export function initResonanciaPage() {
       Motion.playEnter();
       Motion.bindInternalLinks();
       Motion.ensureMuteButton(document.querySelector('.links'));
+      Motion.bindTopnavScroll(document.querySelector('.topbar'));
   
+      const mobileMq = window.matchMedia('(max-width: 1000px)');
+      const isMobile = () => mobileMq.matches;
       // Unlock audio on first gesture (browser autoplay policy)
       const unlockAudio = () => {
         Motion.Audio.ensure();
@@ -45,6 +48,7 @@ export function initResonanciaPage() {
       let ringBreathTween = null;
       let innerBreathTween = null;
       let coreTween = null;
+      let pendingAfterTx = false;
       const keys = Object.create(null);
   
       const els = {
@@ -60,7 +64,11 @@ export function initResonanciaPage() {
         lockFill: document.getElementById('lock-fill'),
         lockLabel: document.getElementById('lock-label'),
         list: document.getElementById('signal-list'),
+        chips: document.getElementById('signal-chips'),
         tx: document.getElementById('tx-panel'),
+        txBody: document.getElementById('tx-body'),
+        txBackdrop: document.getElementById('tx-backdrop'),
+        txClose: document.getElementById('tx-close'),
         status: document.getElementById('status-line'),
         hintCenter: document.getElementById('center-hint'),
         flash: document.getElementById('flash'),
@@ -175,6 +183,84 @@ export function initResonanciaPage() {
             <span class="state">${isLocked ? 'capturada' : isActive ? 'activa' : 'en espera'}</span>
           </div>`;
         }).join('');
+        renderChips();
+      }
+
+      function renderChips() {
+        if (!els.chips) return;
+        els.chips.innerHTML = SIGNALS.map((s, i) => {
+          const isLocked = locked.has(s.id);
+          const isActive = i === current;
+          return `<button type="button" class="sig-chip ${isLocked ? 'locked' : ''} ${isActive ? 'active' : ''}" data-idx="${i}" aria-pressed="${isActive}" aria-label="Señal 0${i + 1}: ${s.short}">
+            <span class="chip-idx">0${i + 1}</span>
+            <span class="chip-name">${s.short}</span>
+          </button>`;
+        }).join('');
+        els.chips.querySelectorAll('.sig-chip').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            const idx = Number(btn.dataset.idx);
+            if (locked.has(SIGNALS[idx].id)) return;
+            setCurrent(idx);
+          });
+        });
+      }
+
+      function openTxSheet() {
+        els.tx.removeAttribute('hidden');
+        els.tx.classList.add('visible');
+        if (isMobile()) {
+          els.tx.classList.add('is-open');
+          els.txBackdrop?.removeAttribute('hidden');
+          els.txBackdrop?.classList.add('is-open');
+          gsap.fromTo(els.tx, { y: '105%' }, { y: '0%', duration: 0.55, ease: 'power3.out' });
+          gsap.fromTo(els.txBackdrop, { opacity: 0 }, { opacity: 1, duration: 0.28 });
+        } else {
+          gsap.fromTo(els.tx, { opacity: 0, y: 28, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.65, ease: 'power3.out' });
+        }
+      }
+
+      function closeTxSheet() {
+        return new Promise((resolve) => {
+          if (!els.tx.classList.contains('visible')) {
+            resolve();
+            return;
+          }
+          if (isMobile()) {
+            gsap.to(els.tx, {
+              y: '105%',
+              duration: 0.35,
+              ease: 'power2.in',
+              onComplete: () => {
+                els.tx.classList.remove('visible', 'is-open');
+                els.tx.setAttribute('hidden', '');
+                els.txBackdrop?.classList.remove('is-open');
+                els.txBackdrop?.setAttribute('hidden', '');
+                gsap.set(els.tx, { clearProps: 'y' });
+                resolve();
+              }
+            });
+            gsap.to(els.txBackdrop, { opacity: 0, duration: 0.25 });
+          } else {
+            gsap.to(els.tx, {
+              opacity: 0,
+              y: 12,
+              scale: 0.98,
+              duration: 0.3,
+              ease: 'power2.in',
+              onComplete: () => {
+                els.tx.classList.remove('visible');
+                els.tx.setAttribute('hidden', '');
+                resolve();
+              }
+            });
+          }
+        });
+      }
+
+      function finishTxReading() {
+        if (!pendingAfterTx) return;
+        pendingAfterTx = false;
+        gsap.delayedCall(0.15, nextPending);
       }
   
       function setCurrent(i) {
@@ -213,10 +299,9 @@ export function initResonanciaPage() {
         capturing = true;
         locked.add(s.id);
         els.progress.textContent = String(locked.size);
-        els.tx.classList.add('visible');
-        els.tx.innerHTML = s.body;
+        els.txBody.innerHTML = s.body;
         els.status.textContent = `Transmisión capturada · ${s.short}`;
-        Motion.bindInternalLinks(els.tx);
+        Motion.bindInternalLinks(els.txBody);
   
         killCoreTween();
         ringBreathTween?.pause();
@@ -237,7 +322,11 @@ export function initResonanciaPage() {
             capturing = false;
             coreVisible = false;
             resetCoreHidden();
-            gsap.delayedCall(0.55, nextPending);
+            if (isMobile()) {
+              pendingAfterTx = true;
+            } else {
+              gsap.delayedCall(0.55, nextPending);
+            }
           }
         });
 
@@ -251,7 +340,7 @@ export function initResonanciaPage() {
           .to(els.ringOuter, { attr: { r: 14 }, opacity: 0, duration: 0.48, ease: 'power2.in' }, 0.82)
           .to(els.ringInner, { attr: { r: 7 }, opacity: 0, duration: 0.44, ease: 'power2.in' }, 0.86)
           .to(els.core, { attr: { r: 0 }, opacity: 0, duration: 0.4, ease: 'power2.in' }, 0.9)
-          .fromTo(els.tx, { opacity: 0, y: 28, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.65 }, 0.15)
+          .add(() => openTxSheet(), 0.15)
           .fromTo(particleEls.map((p) => p.el), { opacity: 0.2 }, {
             opacity: 1, duration: 0.2, stagger: 0.02, yoyo: true, repeat: 1
           }, 0);
@@ -467,6 +556,13 @@ export function initResonanciaPage() {
       window.addEventListener('keyup', (e) => {
         keys[e.key] = false;
         keys[e.key.toLowerCase()] = false;
+      });
+
+      els.txClose?.addEventListener('click', () => {
+        closeTxSheet().then(finishTxReading);
+      });
+      els.txBackdrop?.addEventListener('click', () => {
+        closeTxSheet().then(finishTxReading);
       });
   
       setCurrent(0);

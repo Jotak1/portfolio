@@ -16,6 +16,7 @@ export function initExpedientePage() {
   Motion.ensureMuteButton(
     document.querySelector('.topnav-actions') || document.querySelector('.topnav-inner')
   );
+  Motion.bindTopnavScroll(document.querySelector('.topnav'));
 
   const reduced = Motion.prefersReduced();
   const wave = document.getElementById('hero-wave');
@@ -136,8 +137,8 @@ export function initExpedientePage() {
 
   // Char split hero — scoped selectors so bio/contacto leads stay visible
   const chars1 = Motion.splitChars(document.getElementById('title-l1'));
-  const chars2 = Motion.splitChars(document.getElementById('title-l2'));
-  const allChars = chars1.concat(chars2);
+  const words2 = Motion.splitWords(document.getElementById('title-l2'));
+  const allChars = chars1.concat(words2);
   gsap.set(allChars, { yPercent: 120, opacity: 0 });
   gsap.set('.reveal', { opacity: 0, y: 36 });
   gsap.set('.hero .eyebrow', { opacity: 0, y: 12 });

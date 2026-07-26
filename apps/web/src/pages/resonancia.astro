@@ -42,13 +42,17 @@ const signals = buildSignals(profile, base);
       </div>
     </div>
 
-    <div class="hud" data-od-id="hud">
-      <aside class="panel" data-od-id="tuner">
-        <p class="eyebrow">Sintonizador</p>
-        <h2 id="target-title">Señal 01 · Identidad</h2>
-        <p class="muted" id="target-hint">Arrastra o usa las teclas para alinear frecuencia y amplitud. Mantén el bloqueo para capturar.</p>
+    <div class="signal-chips" id="signal-chips" aria-label="Señales"></div>
 
-        <div style="margin-top:18px">
+    <div class="hud" data-od-id="hud">
+      <aside class="panel tuner-panel" data-od-id="tuner">
+        <div class="tuner-head">
+          <p class="eyebrow">Sintonizador</p>
+          <h2 id="target-title">Señal 01 · Identidad</h2>
+          <p class="muted tuner-hint" id="target-hint">Arrastra o usa las teclas para alinear frecuencia y amplitud. Mantén el bloqueo para capturar.</p>
+        </div>
+
+        <div class="tuner-controls">
           <div class="meter-label"><span>Frecuencia</span><span class="num" id="freq-val">0.42</span></div>
           <div class="meter target-mark" id="freq-meter" style="--target: 58%"><i id="freq-fill"></i></div>
           <div class="meter-label"><span>Amplitud</span><span class="num" id="amp-val">0.35</span></div>
@@ -57,7 +61,7 @@ const signals = buildSignals(profile, base);
           <div class="lockbar"><i id="lock-fill"></i></div>
         </div>
 
-        <div class="signals" id="signal-list" data-od-id="signal-list"></div>
+        <div class="signals signals-list" id="signal-list" data-od-id="signal-list"></div>
       </aside>
 
       <div class="hud-center">
@@ -66,16 +70,24 @@ const signals = buildSignals(profile, base);
         </div>
       </div>
 
-      <aside class="panel tx-panel" id="tx-panel" data-od-id="tx-panel" aria-live="polite"></aside>
+      <div class="tx-backdrop" id="tx-backdrop" hidden></div>
+      <aside class="panel tx-panel" id="tx-panel" data-od-id="tx-panel" aria-live="polite" role="dialog" aria-modal="true" aria-labelledby="tx-panel-title" hidden>
+        <button type="button" class="tx-close" id="tx-close" aria-label="Cerrar transmisión">×</button>
+        <h2 class="visually-hidden" id="tx-panel-title">Transmisión capturada</h2>
+        <div class="tx-body" id="tx-body"></div>
+      </aside>
     </div>
 
     <div class="bottom" data-od-id="bottom">
-      <div class="controls">
+      <div class="controls controls-desktop">
         <div><kbd>A</kbd><kbd>D</kbd> / arrastrar X — frecuencia</div>
         <div><kbd>W</kbd><kbd>S</kbd> / arrastrar Y — amplitud</div>
         <div><kbd>Espacio</kbd> — pulso · <kbd>N</kbd> — siguiente · el sonido crece al sintonizar</div>
       </div>
-      <div class="controls" id="status-line">Onda en espera…</div>
+      <div class="controls controls-tablet">
+        <div><kbd>A</kbd><kbd>D</kbd> frecuencia · <kbd>W</kbd><kbd>S</kbd> amplitud · arrastrar · <kbd>N</kbd> siguiente</div>
+      </div>
+      <div class="controls controls-touch" id="status-line">Onda en espera…</div>
     </div>
   </div>
 

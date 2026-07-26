@@ -100,6 +100,18 @@
     }
     .pill strong { color: var(--accent); font-weight: 600; }
 
+    .signal-chips { display: none; }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
     .hud {
       display: grid;
       grid-template-columns: minmax(240px, 320px) 1fr minmax(240px, 340px);
@@ -109,10 +121,46 @@
       pointer-events: none;
     }
     .hud > * { pointer-events: auto; }
-    @media (max-width: 980px) {
-      .hud { grid-template-columns: 1fr; align-content: space-between; }
-      .hud-center { order: -1; }
-      #wave-wrap { height: min(220px, 28vh); }
+
+    .tuner-controls { margin-top: 18px; }
+    .tuner-controls .meter:last-of-type { margin-bottom: 0; }
+    .tuner-controls .lockbar { margin-bottom: 0; }
+
+    .controls-touch { display: none; }
+    .controls-tablet { display: none; }
+
+    .tx-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 18;
+      background: color-mix(in oklch, var(--bg) 55%, transparent);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      opacity: 0;
+      pointer-events: none;
+    }
+    .tx-backdrop.is-open {
+      display: block;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .tx-close {
+      display: none;
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 2;
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: color-mix(in oklch, var(--surface) 90%, transparent);
+      color: var(--fg);
+      font-size: 22px;
+      line-height: 1;
+      padding: 0;
     }
 
     .panel {
@@ -201,8 +249,11 @@
     }
     .tx-panel.visible { pointer-events: auto; }
     .tx-panel h3 { font-family: var(--font-display); font-size: 22px; margin: 0 0 10px; letter-spacing: -0.02em; }
+    .tx-body h3 { font-family: var(--font-display); font-size: 22px; margin: 0 0 10px; letter-spacing: -0.02em; }
     .tx-panel p, .tx-panel li { color: var(--muted); font-size: 14px; line-height: 1.55; margin: 0 0 10px; }
+    .tx-body p, .tx-body li { color: var(--muted); font-size: 14px; line-height: 1.55; margin: 0 0 10px; }
     .tx-panel ul { margin: 0 0 10px; padding-left: 18px; }
+    .tx-body ul { margin: 0 0 10px; padding-left: 18px; }
     .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
     .chip {
       font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em;
@@ -257,3 +308,216 @@
     }
     .fb-card h3 { font-family: var(--font-display); margin: 0 0 8px; }
     .fb-card p { color: var(--muted); margin: 0; font-size: 14px; }
+
+    @media (max-width: 1000px) {
+      :root {
+        --tuner-sheet-h: clamp(210px, 24vh, 240px);
+        --bottom-stack-h: 22px;
+      }
+
+      #stage {
+        align-items: flex-start;
+        padding-top: calc(96px + env(safe-area-inset-top, 0px));
+      }
+      #wave-wrap {
+        width: min(96vw, 720px);
+        height: min(42vh, 380px);
+      }
+
+      #ui {
+        grid-template-rows: auto auto 1fr;
+      }
+
+      .topbar {
+        padding: 10px 16px;
+        gap: 8px;
+        background: transparent;
+        border-bottom: 1px solid transparent;
+        transition:
+          background 0.25s cubic-bezier(0.23, 1, 0.32, 1),
+          border-color 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+      }
+      .topbar.is-scrolled {
+        background: color-mix(in oklch, var(--bg) 88%, transparent);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-bottom-color: var(--border);
+      }
+      .brand { font-size: 16px; flex: 1 1 auto; min-width: 0; }
+      .links {
+        flex: 0 0 auto;
+        gap: 8px;
+        margin-left: auto;
+      }
+      .links a { display: none; }
+
+      @media (min-width: 768px) {
+        .links a { display: inline; }
+        .topbar { padding: 12px 20px; }
+        .signal-chips { padding: 0 20px 10px; }
+      }
+
+      .signal-chips {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 8px;
+        overflow-x: auto;
+        scrollbar-width: none;
+        padding: 0 16px 8px;
+        pointer-events: auto;
+      }
+      .signal-chips::-webkit-scrollbar { display: none; }
+
+      .sig-chip {
+        flex: 0 0 auto;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        background: color-mix(in oklch, var(--surface) 75%, transparent);
+        color: var(--muted);
+        font-family: var(--font-mono);
+        font-size: 11px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        white-space: nowrap;
+        cursor: pointer;
+      }
+      .sig-chip .chip-idx { color: var(--muted); }
+      .sig-chip.active {
+        border-color: color-mix(in oklch, var(--accent) 55%, var(--border));
+        color: var(--fg);
+        background: color-mix(in oklch, var(--accent) 12%, var(--surface));
+      }
+      .sig-chip.active .chip-idx { color: var(--accent); }
+      .sig-chip.locked {
+        border-color: color-mix(in oklch, var(--ok) 45%, var(--border));
+        background: var(--ok-soft);
+        color: var(--ok);
+        cursor: default;
+      }
+
+      .hud {
+        position: fixed;
+        inset: auto 0 0 0;
+        display: block;
+        padding: 0;
+        pointer-events: none;
+        z-index: 6;
+      }
+
+      .hud-center {
+        position: fixed;
+        left: 16px;
+        right: 16px;
+        bottom: calc(var(--tuner-sheet-h) + var(--bottom-stack-h) + 14px + env(safe-area-inset-bottom, 0px));
+        order: unset;
+        pointer-events: none;
+      }
+      .center-hint {
+        margin-bottom: 0;
+        max-width: none;
+        font-size: 11px;
+        padding: 10px 14px;
+        line-height: 1.35;
+      }
+
+      .tuner-panel {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        pointer-events: auto;
+        border-radius: 20px 20px 0 0;
+        border-bottom: none;
+        padding: 14px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+        max-height: var(--tuner-sheet-h);
+      }
+      .tuner-head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 10px;
+      }
+      .tuner-head .eyebrow { margin: 0; flex: 0 0 auto; }
+      .tuner-head h2 {
+        font-size: 17px;
+        margin: 0;
+        text-align: right;
+        flex: 1 1 auto;
+        min-width: 0;
+      }
+      .tuner-hint { display: none; }
+      .tuner-controls {
+        margin-top: 0;
+      }
+      .tuner-controls .meter { margin-bottom: 10px; }
+      .signals-list { display: none; }
+
+      .tx-panel {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 20;
+        max-height: min(78vh, 640px);
+        border-radius: 20px 20px 0 0;
+        border-bottom: none;
+        padding: 44px 16px calc(16px + env(safe-area-inset-bottom, 0px));
+        overflow: auto;
+        transform: translateY(105%);
+        opacity: 1;
+        pointer-events: none;
+      }
+      .tx-panel.is-open {
+        pointer-events: auto;
+      }
+      .tx-close { display: inline-flex; align-items: center; justify-content: center; }
+
+      .bottom {
+        display: block;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: calc(var(--tuner-sheet-h) + env(safe-area-inset-bottom, 0px));
+        padding: 0 16px 6px;
+        background: none;
+        pointer-events: none;
+        z-index: 5;
+        justify-content: center;
+      }
+      .controls-desktop { display: none; }
+      .controls-tablet { display: none; }
+      .controls-touch {
+        display: block;
+        text-align: center;
+        font-size: 10px;
+        width: 100%;
+        line-height: 1.35;
+      }
+
+      @media (min-width: 768px) {
+        :root { --bottom-stack-h: 50px; }
+
+        .hud-center {
+          bottom: calc(var(--tuner-sheet-h) + var(--bottom-stack-h) + 16px + env(safe-area-inset-bottom, 0px));
+        }
+
+        .controls-tablet {
+          display: block;
+          text-align: center;
+          font-size: 10px;
+          width: 100%;
+          margin-top: 5px;
+          opacity: 0.88;
+          line-height: 1.35;
+        }
+        .controls-tablet kbd {
+          font-size: 9px;
+          padding: 1px 5px;
+        }
+      }
+    }

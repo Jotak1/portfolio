@@ -31,7 +31,7 @@ export const profile: Profile = {
   hero: {
     eyebrow: 'Expediente · lectura',
     titleLine1: 'Juan Pablo.',
-    titleLine2: 'Full-stack e IA aplicada.',
+    titleLine2: 'Desarrollador full-stack.',
     lead: 'Construyo el sistema completo: front, APIs, datos y operación. IA como herramienta para desarrollar y para entregar.',
     signalLabel: 'Señal activa',
     signalRole: 'Full-Stack · IA aplicada',

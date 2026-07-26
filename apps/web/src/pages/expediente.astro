@@ -6,6 +6,7 @@ import '../styles/pages/expediente.css';
 const base = import.meta.env.BASE_URL;
 const {
   name,
+  shortName,
   role,
   location,
   education,
@@ -21,6 +22,7 @@ const {
   contact,
   experience,
 } = profile;
+const familyName = name.slice(shortName.length).trim();
 ---
 
 <BaseLayout title={`Expediente · ${name}`} description={profile.seoDescription} bodyClass="">
@@ -29,7 +31,10 @@ const {
 
   <header class="topnav" data-od-id="topnav">
     <div class="container topnav-inner">
-      <a class="logo" href={base} data-transition-label="Inicio" data-od-id="logo">{name}</a>
+      <a class="logo" href={base} data-transition-label="Inicio" data-od-id="logo">
+        <span class="logo-given">{shortName}</span>
+        <span class="logo-family">{familyName}</span>
+      </a>
       <nav aria-label="Secciones del expediente">
         <a href="#ia" data-od-id="nav-ia">IA</a>
         <a href="#trayectoria" data-od-id="nav-trayectoria">Trayectoria</a>

@@ -11,6 +11,7 @@ export function initIndexPage() {
       Motion.playEnter();
       Motion.bindInternalLinks();
       Motion.ensureMuteButton(document.querySelector('.topnav'));
+      Motion.bindTopnavScroll(document.querySelector('.topnav'));
 
       const reduced = Motion.prefersReduced();
       const cards = gsap.utils.toArray('.view-card');

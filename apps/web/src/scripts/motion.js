@@ -508,6 +508,32 @@ export function createOdMotion(global = window) {
     });
   }
 
+  function bindTopnavScroll(topnav, { threshold = 12, media = '(max-width: 720px)' } = {}) {
+    if (!topnav) return;
+    const mq = window.matchMedia(media);
+    let ticking = false;
+
+    function update() {
+      ticking = false;
+      if (!mq.matches) {
+        topnav.classList.remove('is-scrolled');
+        return;
+      }
+      topnav.classList.toggle('is-scrolled', window.scrollY > threshold);
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    }
+
+    mq.addEventListener('change', update);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    update();
+  }
+
   global.Motion = {
     prefersReduced,
     hasViewTransition,
@@ -520,6 +546,7 @@ export function createOdMotion(global = window) {
     ensureCurtain,
     injectCurtainStyles,
     Audio: AudioBus,
-    ensureMuteButton
+    ensureMuteButton,
+    bindTopnavScroll
   };
 }

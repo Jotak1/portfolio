@@ -85,6 +85,9 @@
         0 2px 20px color-mix(in oklch, var(--bg) 88%, transparent),
         0 0 1px color-mix(in oklch, var(--bg) 45%, transparent);
     }
+    .logo-given,
+    .logo-family { display: inline; }
+    .logo-family::before { content: ' '; }
     .topnav .meta {
       margin-left: auto;
       font-family: var(--font-mono);
@@ -179,6 +182,38 @@
     @media (max-width: 860px) {
       .views { grid-template-columns: 1fr; }
       .cursor-glow { display: none; }
+    }
+
+    @media (max-width: 720px) {
+      .topnav {
+        margin-inline: calc(-1 * var(--gutter));
+        padding-inline: var(--gutter);
+        border-bottom: 1px solid transparent;
+        background: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        transition:
+          background 0.25s cubic-bezier(0.23, 1, 0.32, 1),
+          border-color 0.25s cubic-bezier(0.23, 1, 0.32, 1),
+          backdrop-filter 0.25s cubic-bezier(0.23, 1, 0.32, 1);
+      }
+      .topnav.is-scrolled {
+        background: color-mix(in oklch, var(--bg) 88%, transparent);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-bottom-color: var(--border);
+      }
+      .topnav .logo {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1px;
+        line-height: 1.1;
+      }
+      .topnav .logo-family {
+        letter-spacing: -0.01em;
+      }
+      .topnav .logo-family::before { content: none; }
     }
 
     .view-card {

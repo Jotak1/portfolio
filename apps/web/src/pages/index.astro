@@ -4,7 +4,8 @@ import { profile } from '../content/profile';
 import '../styles/pages/index.css';
 
 const base = import.meta.env.BASE_URL;
-const { home, name, email, links } = profile;
+const { home, name, shortName, email, links } = profile;
+const familyName = name.slice(shortName.length).trim();
 ---
 
 <BaseLayout title={`Inicio · ${name}`} description={profile.seoDescription} bodyClass="page-home">
@@ -17,7 +18,10 @@ const { home, name, email, links } = profile;
   <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
   <div class="container">
     <header class="topnav reveal" data-od-id="topnav">
-      <a class="logo" href={base} data-od-id="logo">{name}</a>
+      <a class="logo" href={base} data-od-id="logo">
+        <span class="logo-given">{shortName}</span>
+        <span class="logo-family">{familyName}</span>
+      </a>
       <span class="meta" data-od-id="role-meta">{home.roleMeta}</span>
     </header>
 
