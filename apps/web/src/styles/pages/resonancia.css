@@ -41,9 +41,12 @@
     #wave-wrap svg { width: 100%; height: 100%; overflow: visible; }
     .wave-target {
       fill: none;
-      stroke: color-mix(in oklch, var(--fg) 16%, transparent);
-      stroke-width: 1.5;
-      stroke-dasharray: 6 8;
+      stroke: color-mix(in oklch, var(--accent) 48%, var(--fg));
+      stroke-width: 2;
+      stroke-dasharray: 12 8;
+      stroke-linecap: round;
+      opacity: 0.78;
+      filter: drop-shadow(0 0 6px color-mix(in oklch, var(--accent) 22%, transparent));
     }
     .wave-live {
       fill: none;
@@ -326,6 +329,11 @@
       #wave-wrap {
         width: min(96vw, 720px);
         height: min(42vh, 380px);
+      }
+      .wave-target {
+        stroke-width: 2.25;
+        stroke-dasharray: 16 10;
+        opacity: 0.88;
       }
 
       #ui {
