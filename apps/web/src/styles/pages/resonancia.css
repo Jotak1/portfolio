@@ -26,6 +26,9 @@
     #stage {
       position: fixed; inset: 0;
       display: grid; place-items: center;
+      touch-action: none;
+      -webkit-user-select: none;
+      user-select: none;
       background:
         radial-gradient(ellipse 60% 40% at 50% 45%, var(--accent-soft), transparent 60%),
         var(--bg);
@@ -127,6 +130,7 @@
     .tuner-controls .lockbar { margin-bottom: 0; }
 
     .controls-touch { display: none; }
+    .controls-touch-hint { opacity: 0.72; margin-top: 2px; }
     .controls-tablet { display: none; }
 
     .tx-backdrop {

@@ -33,6 +33,9 @@ export function initResonanciaPage() {
       const TOL = 0.055;
       const LOCK_MS = 1400;
       const PARTICLE_COUNT = 18;
+      const DRAG_SENS = { mouse: 0.0018, touch: 0.0055 };
+      const clamp = (v) => Math.min(1, Math.max(0, v));
+      const dragSens = (e) => (e.pointerType === 'touch' ? DRAG_SENS.touch : DRAG_SENS.mouse);
       const reducedMotion = Motion.prefersReduced();
       const locked = new Set();
       let current = 0;
@@ -534,15 +537,18 @@ export function initResonanciaPage() {
         lastX = e.clientX;
         lastY = e.clientY;
         stage.setPointerCapture(e.pointerId);
+        if (e.cancelable) e.preventDefault();
       });
       stage.addEventListener('pointermove', (e) => {
         if (!dragging) return;
+        if (e.cancelable) e.preventDefault();
         const dx = e.clientX - lastX;
         const dy = e.clientY - lastY;
         lastX = e.clientX;
         lastY = e.clientY;
-        freq = Math.min(1, Math.max(0, freq + dx * 0.0018));
-        amp = Math.min(1, Math.max(0, amp - dy * 0.0018));
+        const s = dragSens(e);
+        freq = clamp(freq + dx * s);
+        amp = clamp(amp - dy * s);
       });
       stage.addEventListener('pointerup', () => { dragging = false; });
       stage.addEventListener('pointercancel', () => { dragging = false; });
