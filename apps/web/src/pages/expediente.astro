@@ -11,8 +11,6 @@ const {
   location,
   education,
   email,
-  phone,
-  phoneHref,
   links,
   hero,
   bioHeadline,
@@ -207,7 +205,6 @@ const familyName = name.slice(shortName.length).trim();
         <p class="lead" style="margin: 16px auto 28px;">{contact.pitch}</p>
         <div class="hero-cta" style="justify-content: center;">
           <a class="btn btn-primary" href={`mailto:${email}`} data-od-id="cta-mail">{email}</a>
-          <a class="btn btn-secondary" href={phoneHref} data-od-id="cta-phone" aria-label={`Llamar al ${phone}`}>{phone}</a>
         </div>
         <div class="chips" style="justify-content: center; margin-top: 24px;" role="list">
           <a class="tag" role="listitem" href={links.linkedin} target="_blank" rel="noopener noreferrer" data-od-id="link-linkedin" aria-label="LinkedIn (se abre en una pestaña nueva)">LinkedIn</a>

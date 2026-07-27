@@ -53,8 +53,6 @@ export interface Profile {
   roleSignal: string;
   location: string;
   email: string;
-  phone: string;
-  phoneHref: string;
   seoDescription: string;
   links: {
     linkedin?: string;

@@ -8,8 +8,6 @@ export const profile: Profile = {
   roleSignal: 'Full-Stack · IA aplicada',
   location: 'Chile',
   email: 'jp.ausensi@gmail.com',
-  phone: '+56 9 2736 6163',
-  phoneHref: 'tel:+56927366163',
   seoDescription:
     'Juan Pablo Ausensi — desarrollador full-stack en Chile. Sistemas en producción; integración de modelos de IA cuando el producto lo pide.',
   links: {

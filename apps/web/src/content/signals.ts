@@ -87,7 +87,6 @@ export function buildSignals(p: Profile, base: string): ResonanciaSignal[] {
             <h3>Contacto</h3>
             <p>${p.contact.headline} ${p.contact.pitch}</p>
             <a class="cta" href="mailto:${p.email}">${p.email}</a>
-            <p style="margin-top:14px;font-family:var(--font-mono);font-size:13px">${p.phone}</p>
             <div class="chips" style="margin-top:14px">
               <a class="chip" href="${p.links.linkedin}" target="_blank" rel="noopener">LinkedIn</a>
               <a class="chip" href="${p.links.github}" target="_blank" rel="noopener">GitHub</a>
