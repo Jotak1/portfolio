@@ -1,11 +1,11 @@
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { createOdMotion } from './motion.js';
+import type { ScrollTrigger as ScrollTriggerType } from 'gsap/ScrollTrigger';
 
 declare global {
   interface Window {
     gsap: typeof gsap;
-    ScrollTrigger: typeof ScrollTrigger;
+    ScrollTrigger?: typeof ScrollTriggerType;
     // Shared motion helpers (curtain, VT, audio, split…)
     Motion: any;
     __BASE__?: string;
@@ -29,6 +29,7 @@ export async function bootMotion(opts: BootOptions = {}): Promise<void> {
   window.gsap = gsap;
 
   if (opts.scrollTrigger) {
+    const { ScrollTrigger } = await import('gsap/ScrollTrigger');
     gsap.registerPlugin(ScrollTrigger);
     window.ScrollTrigger = ScrollTrigger;
   }

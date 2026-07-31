@@ -97,28 +97,16 @@ export function initIndexPage() {
         gsap.set('.reveal, .split-char', { clearProps: 'all', opacity: 1, y: 0 });
         return;
       }
-  
-      const chars1 = Motion.splitChars(document.getElementById('title-l1'));
-      const chars2 = Motion.splitChars(document.getElementById('title-l2'));
-      const allChars = chars1.concat(chars2);
-  
-      gsap.set(allChars, { yPercent: 120, opacity: 0 });
-      gsap.set('.reveal', { opacity: 0, y: 28 });
-  
+
+      // Keep hero title + lead visible for LCP; animate secondary chrome only.
+      gsap.set('.topnav, .eyebrow, .view-card, .foot', { opacity: 0, y: 28 });
+
       const intro = gsap.timeline({ defaults: { ease: 'power3.out' } });
       intro
         .to('.topnav', { opacity: 1, y: 0, duration: 0.7 }, 0.05)
         .to('.eyebrow', { opacity: 1, y: 0, duration: 0.55 }, 0.12)
-        .to(allChars, {
-          yPercent: 0,
-          opacity: 1,
-          duration: 0.75,
-          stagger: 0.018,
-          ease: 'power4.out'
-        }, 0.2)
-        .to('.lead', { opacity: 1, y: 0, duration: 0.7 }, 0.55)
-        .to(cards, { opacity: 1, y: 0, duration: 0.85, stagger: 0.12 }, 0.65)
-        .to('.foot', { opacity: 1, y: 0, duration: 0.6 }, 0.95);
+        .to(cards, { opacity: 1, y: 0, duration: 0.85, stagger: 0.12 }, 0.45)
+        .to('.foot', { opacity: 1, y: 0, duration: 0.6 }, 0.75);
   
       gsap.fromTo(lines, {
         scaleX: 0.2,
@@ -175,8 +163,18 @@ export function initIndexPage() {
       // Magnetic tilt
       cards.forEach((card) => {
         const rot = { x: 0, y: 0 };
+        let cardRect = null;
+
+        const cacheRect = () => {
+          cardRect = card.getBoundingClientRect();
+        };
+
+        card.addEventListener('pointerenter', cacheRect);
+        window.addEventListener('resize', cacheRect);
+
         card.addEventListener('pointermove', (e) => {
-          const r = card.getBoundingClientRect();
+          if (!cardRect) cacheRect();
+          const r = cardRect;
           const px = (e.clientX - r.left) / r.width - 0.5;
           const py = (e.clientY - r.top) / r.height - 0.5;
           gsap.to(rot, {
@@ -190,6 +188,7 @@ export function initIndexPage() {
           });
         });
         card.addEventListener('pointerleave', () => {
+          cardRect = null;
           gsap.to(rot, {
             x: 0, y: 0, duration: 0.55, ease: 'power3.out',
             onUpdate: () => {

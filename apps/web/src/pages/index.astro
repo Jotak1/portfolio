@@ -31,7 +31,7 @@ const familyName = name.slice(shortName.length).trim();
         <span class="title-line" id="title-l1">{home.titleLine1}</span>
         <span class="title-line" id="title-l2">{home.titleLine2}</span>
       </h1>
-      <p class="lead reveal">{home.lead}</p>
+      <p class="lead">{home.lead}</p>
     </section>
 
     <section class="views" data-od-id="views">
@@ -104,7 +104,14 @@ const familyName = name.slice(shortName.length).trim();
   import { initHalftoneDrift } from '../scripts/halftone-drift.js';
 
   bootMotion({ scrollTrigger: false }).then(() => {
-    initHalftoneDrift(document.getElementById('halftone-canvas') as HTMLCanvasElement | null);
     initIndexPage();
+
+    const canvas = document.getElementById('halftone-canvas') as HTMLCanvasElement | null;
+    const startHalftone = () => initHalftoneDrift(canvas);
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(startHalftone, { timeout: 2000 });
+    } else {
+      requestAnimationFrame(() => requestAnimationFrame(startHalftone));
+    }
   });
 </script>

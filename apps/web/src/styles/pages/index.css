@@ -148,6 +148,12 @@
         0 2px 4px color-mix(in oklch, var(--bg) 75%, transparent);
     }
     .title-line { display: block; }
+    /* LCP: hero copy stays visible before motion JS runs */
+    .hero h1,
+    .hero .lead {
+      opacity: 1;
+      transform: none;
+    }
     .hero .lead {
       color: color-mix(in oklch, var(--fg) 85%, var(--muted));
       font-size: 18px;
