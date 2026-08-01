@@ -303,7 +303,7 @@ a.tag:hover {
   line-height: 0.9;
   letter-spacing: -0.04em;
   font-weight: 600;
-  color: color-mix(in oklch, var(--fg) 14%, transparent);
+  color: color-mix(in oklch, var(--muted) 72%, var(--bg));
   user-select: none;
 }
 .timeline-meta {
