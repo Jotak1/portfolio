@@ -1,5 +1,5 @@
 /**
- * Halftone Drift — WebGL2 ambient background for the home hero.
+ * Halftone Drift — WebGL2 ambient background for Expediente.
  * Flowing field screened through a rotated halftone grid (duotone ink → cyan).
  * Pointer bends the drift. Credit: Open Design Halftone Drift example.
  */

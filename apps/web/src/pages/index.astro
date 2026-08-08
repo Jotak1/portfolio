@@ -1,119 +1,42 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { profile } from '../content/profile';
-import '../styles/pages/index.css';
-
+/**
+ * Entry redirects to Expediente — the former home launcher was removed.
+ * Halftone Drift lives on the Expediente page.
+ */
 const base = import.meta.env.BASE_URL;
-const { home, name, shortName, email, links } = profile;
-const familyName = name.slice(shortName.length).trim();
+const target = `${base}expediente/`;
 ---
-
-<BaseLayout title={`Inicio · ${name}`} description={profile.seoDescription} bodyClass="page-home">
-  <canvas
-    id="halftone-canvas"
-    class="halftone-canvas"
-    data-od-id="halftone-canvas"
-    aria-hidden="true"
-  ></canvas>
-  <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
-  <main id="content">
-  <div class="container">
-    <header class="topnav reveal" data-od-id="topnav">
-      <a class="logo" href={base} data-od-id="logo">
-        <span class="logo-given">{shortName}</span>
-        <span class="logo-family">{familyName}</span>
-      </a>
-      <span class="meta" data-od-id="role-meta">{home.roleMeta}</span>
-    </header>
-
-    <section class="hero" data-od-id="hero">
-      <p class="eyebrow reveal">{home.eyebrow}</p>
-      <h1 data-od-id="hero-title">
-        <span class="title-line" id="title-l1">{home.titleLine1}</span>
-        <span class="title-line" id="title-l2">{home.titleLine2}</span>
-      </h1>
-      <p class="lead">{home.lead}</p>
-    </section>
-
-    <section class="views" data-od-id="views">
-      <a class="view-card reveal" href={`${base}expediente/`} data-transition-label="Expediente" data-od-id="card-expediente">
-        <div class="view-visual dossier" aria-hidden="true">
-          <div class="doc-block">
-            <div class="doc-line" style="width:70%"></div>
-            <div class="doc-line"></div>
-            <div class="doc-line short"></div>
-            <div class="doc-line" style="width:85%;margin-top:18px"></div>
-            <div class="doc-line short"></div>
-            <div class="doc-line" style="width:60%"></div>
-          </div>
-          <div class="doc-aside">
-            <span class="meta" style="color: var(--accent);">Resumen</span>
-            <div>
-              <div class="doc-line" style="background: color-mix(in oklch, var(--accent) 40%, transparent);"></div>
-              <div class="doc-line short"></div>
-            </div>
-          </div>
-        </div>
-        <div class="view-body">
-          <p class="meta" style="margin-bottom: 8px; color: var(--muted);">Vista 01 · Lectura</p>
-          <h2>Expediente</h2>
-          <p>{home.expedienteCard}</p>
-          <span class="btn btn-secondary">Abrir expediente</span>
-        </div>
-      </a>
-
-      <a class="view-card reveal" href={`${base}resonancia/`} data-transition-label="Resonancia" data-od-id="card-resonancia">
-        <div class="view-visual game" aria-hidden="true">
-          <div class="wave-stage" id="wave-stage">
-            <svg viewBox="0 0 280 120" preserveAspectRatio="xMidYMid meet">
-              <defs>
-                <linearGradient id="wave-grad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.35" />
-                  <stop offset="100%" stop-color="var(--accent)" stop-opacity="0" />
-                </linearGradient>
-              </defs>
-              <path class="wave-ghost" id="preview-wave-ghost" d="" />
-              <path class="wave-fill" id="preview-wave-fill" d="" />
-              <path class="wave-harm" id="preview-wave-harm" d="" />
-              <path class="wave-path" id="preview-wave" d="" />
-            </svg>
-          </div>
-        </div>
-        <div class="view-body">
-          <p class="meta" style="margin-bottom: 8px; color: var(--muted);">Vista 02 · Juego</p>
-          <h2>Resonancia</h2>
-          <p>{home.resonanciaCard}</p>
-          <span class="btn btn-primary">Entrar a Resonancia</span>
-        </div>
-      </a>
-    </section>
-
-    <footer class="foot reveal" data-od-id="footer">
-      <span>© 2026 {name}</span>
-      <span>
-        <a href={`mailto:${email}`}>{email}</a>
-        ·
-        <a href={links.github} target="_blank" rel="noopener">GitHub</a>
-      </span>
-    </footer>
-  </div>
-  </main>
-</BaseLayout>
-
-<script>
-  import { bootMotion } from '../scripts/boot.ts';
-  import { initIndexPage } from '../scripts/index-page.js';
-  import { initHalftoneDrift } from '../scripts/halftone-drift.js';
-
-  bootMotion({ scrollTrigger: false }).then(() => {
-    initIndexPage();
-
-    const canvas = document.getElementById('halftone-canvas') as HTMLCanvasElement | null;
-    const startHalftone = () => initHalftoneDrift(canvas);
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(startHalftone, { timeout: 2000 });
-    } else {
-      requestAnimationFrame(() => requestAnimationFrame(startHalftone));
-    }
-  });
-</script>
+<!doctype html>
+<html lang="es-ES">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <link rel="canonical" href={target} />
+    <title>Expediente · Juan Pablo Ausensi</title>
+    <script define:vars={{ target }}>
+      location.replace(target);
+    </script>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: oklch(14% 0.012 250);
+        --fg: oklch(94% 0.01 95);
+        --accent: oklch(78% 0.13 210);
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: var(--bg);
+        color: var(--fg);
+        font: 15px / 1.5 system-ui, sans-serif;
+      }
+      a { color: var(--accent); }
+    </style>
+  </head>
+  <body>
+    <p>Abriendo <a href={target}>Expediente</a>…</p>
+  </body>
+</html>

@@ -23,13 +23,19 @@ const {
 const familyName = name.slice(shortName.length).trim();
 ---
 
-<BaseLayout title={`Expediente · ${name}`} description={profile.seoDescription} bodyClass="">
+<BaseLayout title={`Expediente · ${name}`} description={profile.seoDescription} bodyClass="page-expediente">
+  <canvas
+    id="halftone-canvas"
+    class="halftone-canvas"
+    data-od-id="halftone-canvas"
+    aria-hidden="true"
+  ></canvas>
   <a class="skip-link" href="#content">Saltar al contenido</a>
   <div class="progress" id="scroll-progress" role="progressbar" aria-hidden="true"></div>
 
   <header class="topnav" data-od-id="topnav">
     <div class="container topnav-inner">
-      <a class="logo" href={base} data-transition-label="Inicio" data-od-id="logo">
+      <a class="logo" href={`${base}expediente/`} data-transition-label="Expediente" data-od-id="logo">
         <span class="logo-given">{shortName}</span>
         <span class="logo-family">{familyName}</span>
       </a>
@@ -226,5 +232,17 @@ const familyName = name.slice(shortName.length).trim();
 <script>
   import { bootMotion } from '../scripts/boot.ts';
   import { initExpedientePage } from '../scripts/expediente-page.js';
-  bootMotion({ scrollTrigger: true }).then(() => initExpedientePage());
+  import { initHalftoneDrift } from '../scripts/halftone-drift.js';
+
+  bootMotion({ scrollTrigger: true }).then(() => {
+    initExpedientePage();
+
+    const canvas = document.getElementById('halftone-canvas') as HTMLCanvasElement | null;
+    const startHalftone = () => initHalftoneDrift(canvas);
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(startHalftone, { timeout: 2000 });
+    } else {
+      requestAnimationFrame(() => requestAnimationFrame(startHalftone));
+    }
+  });
 </script>

@@ -42,6 +42,49 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
+
+/* Halftone Drift owns the field behind Expediente UI */
+body.page-expediente {
+  background: var(--bg);
+}
+.halftone-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  z-index: 0;
+  pointer-events: none;
+  touch-action: none;
+  opacity: 0.62;
+}
+.halftone-canvas[hidden] {
+  display: none;
+}
+/* Dark veil between GPU field and copy — keeps drift visible, text readable */
+body.page-expediente::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in oklch, var(--bg) 78%, transparent) 0%,
+      color-mix(in oklch, var(--bg) 62%, transparent) 42%,
+      color-mix(in oklch, var(--bg) 74%, transparent) 100%
+    );
+}
+.topnav,
+main#content,
+.pagefoot {
+  position: relative;
+  z-index: 2;
+}
+.topnav {
+  z-index: 10;
+}
 ::selection {
   background: color-mix(in oklch, var(--accent) 35%, transparent);
   color: var(--fg);
@@ -113,8 +156,9 @@ h1, h2, h3 { text-wrap: balance; font-family: var(--font-display); margin: 0; }
 
 .topnav {
   position: sticky; top: 0; z-index: 10;
-  background: color-mix(in oklch, var(--bg) 88%, transparent);
-  backdrop-filter: blur(14px);
+  background: color-mix(in oklch, var(--bg) 94%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border);
 }
 .topnav-inner {
@@ -173,12 +217,24 @@ h1, h2, h3 { text-wrap: balance; font-family: var(--font-display); margin: 0; }
   background: color-mix(in oklch, var(--accent) 88%, white);
   box-shadow: 0 0 0 1px color-mix(in oklch, var(--accent) 40%, transparent);
 }
-.btn-secondary { background: transparent; color: var(--fg); border-color: var(--border); }
+.btn-secondary {
+  background: color-mix(in oklch, var(--bg) 72%, transparent);
+  color: var(--fg);
+  border-color: var(--border);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
 .btn-secondary:hover {
   border-color: color-mix(in oklch, var(--fg) 55%, var(--border));
-  background: color-mix(in oklch, var(--fg) 4%, transparent);
+  background: color-mix(in oklch, var(--bg) 88%, transparent);
 }
-.btn-ghost { background: transparent; color: var(--fg); border-color: transparent; padding-inline: 8px; }
+.btn-ghost {
+  background: color-mix(in oklch, var(--bg) 55%, transparent);
+  color: var(--fg);
+  border-color: transparent;
+  padding-inline: 12px;
+  text-shadow: 0 1px 10px color-mix(in oklch, var(--bg) 85%, transparent);
+}
 .btn-ghost:hover { color: var(--accent); }
 .btn-arrow::after { content: '→'; transition: transform 0.15s cubic-bezier(0.23, 1, 0.32, 1); }
 .btn-arrow:hover::after { transform: translateX(3px); }
@@ -216,7 +272,52 @@ a.tag:hover {
 }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
 
-.hero { padding-block: clamp(72px, 11vw, 140px); }
+.hero {
+  padding-block: clamp(72px, 11vw, 140px);
+  position: relative;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    ellipse 90% 75% at 30% 38%,
+    color-mix(in oklch, var(--bg) 94%, transparent) 0%,
+    color-mix(in oklch, var(--bg) 72%, transparent) 48%,
+    transparent 78%
+  );
+}
+.hero .container {
+  position: relative;
+  z-index: 1;
+}
+.hero h1,
+.hero .lead,
+.hero .eyebrow {
+  text-shadow:
+    0 0 28px color-mix(in oklch, var(--bg) 96%, transparent),
+    0 0 12px color-mix(in oklch, var(--bg) 88%, transparent),
+    0 1px 2px color-mix(in oklch, var(--bg) 80%, transparent);
+}
+.hero .lead {
+  color: color-mix(in oklch, var(--fg) 78%, var(--muted));
+}
+/* Open-field section copy (outside solid cards) */
+.section > .container > .eyebrow,
+.section > .container > .h2,
+.section > .container > h2,
+.section > .container > .lead,
+.section .grid-2-1 > div > .eyebrow,
+.section .grid-2-1 > div > .h2,
+.section .grid-2-1 > div > h2,
+.section .grid-2-1 > div > .lead,
+.section .grid-2-1 > div > p:not(.meta):not(.eyebrow) {
+  text-shadow:
+    0 0 20px color-mix(in oklch, var(--bg) 92%, transparent),
+    0 1px 2px color-mix(in oklch, var(--bg) 75%, transparent);
+}
 .hero #title-l2 .split-line {
   display: inline;
   overflow: visible;
@@ -285,7 +386,7 @@ a.tag:hover {
   height: 100vh;
   overflow: hidden;
   position: relative;
-  background: var(--bg);
+  background: color-mix(in oklch, var(--bg) 48%, transparent);
 }
 .timeline-hud {
   position: absolute;
@@ -303,8 +404,16 @@ a.tag:hover {
   line-height: 0.9;
   letter-spacing: -0.04em;
   font-weight: 600;
-  color: color-mix(in oklch, var(--muted) 72%, var(--bg));
+  color: color-mix(in oklch, var(--fg) 42%, var(--muted));
+  text-shadow:
+    0 0 40px color-mix(in oklch, var(--bg) 90%, transparent),
+    0 2px 4px color-mix(in oklch, var(--bg) 70%, transparent);
   user-select: none;
+}
+.timeline-meta .meta,
+.timeline-meta .lead {
+  color: color-mix(in oklch, var(--fg) 72%, var(--muted));
+  text-shadow: 0 1px 12px color-mix(in oklch, var(--bg) 88%, transparent);
 }
 .timeline-meta {
   display: flex;
@@ -386,9 +495,9 @@ a.tag:hover {
       backdrop-filter 0.25s cubic-bezier(0.23, 1, 0.32, 1);
   }
   .topnav.is-scrolled {
-    background: color-mix(in oklch, var(--bg) 88%, transparent);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    background: color-mix(in oklch, var(--bg) 94%, transparent);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border-bottom-color: var(--border);
   }
   .topnav .logo {
